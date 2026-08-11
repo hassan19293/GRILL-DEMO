@@ -2,829 +2,954 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Grill House — Fire. Flavor. Craft.</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="A modern steakhouse in Sydney where every plate begins with fire. Reserve a table or ask our Concierge." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#0B0B0A',
+          surface: '#141311',
+          ink: '#F4F0E8',
+          'ink-soft': '#A8A39A',
+          gold: '#C9A66B',
+          line: 'rgba(244,240,232,0.12)',
+          'line-strong': 'rgba(244,240,232,0.2)',
+        },
+        fontFamily: {
+          serif: ['"Cormorant Garamond"', 'serif'],
+          sans: ['Inter', 'sans-serif'],
+        },
+        transitionTimingFunction: {
+          premium: 'cubic-bezier(.22,1,.36,1)',
+        },
+        maxWidth: {
+          wrap: '1440px',
+        },
+      },
+    },
+  };
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
 <style>
-:root{
-  --bg:#0B0B0A;
-  --surface:#141311;
-  --text:#F4F0E8;
-  --text-soft:#A8A39A;
-  --gold:#C9A66B;
-  --border:rgba(244,240,232,0.12);
-  --border-strong:rgba(244,240,232,0.2);
-  --serif: 'Cormorant Garamond', serif;
-  --sans: 'Inter', sans-serif;
-  --ease: cubic-bezier(.22,1,.36,1);
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:var(--sans);
-  font-weight:300;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
-img,.ph{display:block;width:100%;height:100%;object-fit:cover;}
-a{color:inherit;text-decoration:none;}
-button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit;}
-.wrap{max-width:1440px;margin:0 auto;padding:0 clamp(20px,5vw,80px);}
-.label{
-  font-family:var(--sans);
-  font-size:11px;
-  letter-spacing:0.28em;
-  text-transform:uppercase;
-  color:var(--gold);
-  font-weight:500;
-}
-.h-display{
-  font-family:var(--serif);
-  font-weight:400;
-  line-height:1.02;
-  letter-spacing:-0.01em;
-}
-.body-text{
-  font-family:var(--sans);
-  font-weight:300;
-  line-height:1.75;
-  color:var(--text-soft);
-  font-size:16px;
-}
-.divider{width:100%;height:1px;background:var(--border);}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  font-size:12px;
-  letter-spacing:0.18em;
-  text-transform:uppercase;
-  font-weight:500;
-  padding:18px 34px;
-  border:1px solid var(--border-strong);
-  transition:all .5s var(--ease);
-  white-space:nowrap;
-}
-.btn-primary{background:var(--text);color:var(--bg);border-color:var(--text);}
-.btn-primary:hover{background:var(--gold);border-color:var(--gold);}
-.btn-ghost{color:var(--text);}
-.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
-.btn svg{transition:transform .5s var(--ease);}
-.btn:hover svg{transform:translateX(5px);}
-:focus-visible{outline:1px solid var(--gold);outline-offset:3px;}
+  html { scroll-behavior: smooth; }
+  body { background: #0B0B0A; color: #F4F0E8; }
+  ::selection { background: #C9A66B; color: #0B0B0A; }
+  :focus-visible { outline: 1px solid #C9A66B; outline-offset: 3px; }
 
-/* placeholder imagery — swap with real photography via data-img config */
-.ph{
-  position:relative;
-  background:
-    radial-gradient(120% 140% at 15% 10%, rgba(201,166,107,0.16), transparent 55%),
-    linear-gradient(160deg, #1c1a16 0%, #100f0d 55%, #08080770 100%);
-  overflow:hidden;
-}
-.ph::before{
-  content:'';
-  position:absolute;inset:0;
-  background-image:
-    repeating-linear-gradient(115deg, rgba(244,240,232,0.035) 0px, rgba(244,240,232,0.035) 1px, transparent 1px, transparent 3px);
-  mix-blend-mode:overlay;
-  opacity:.5;
-}
-.ph::after{
-  content:attr(data-tag);
-  position:absolute;
-  bottom:14px;left:16px;
-  font-family:var(--sans);
-  font-size:10px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:rgba(244,240,232,0.28);
-}
-.ph-inner{position:absolute;inset:0;}
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 
-::selection{background:var(--gold);color:var(--bg);}
+  /* Placeholder texture shown where a real photo would go.
+     Swap any .ph-texture <div> for a real <img> once photography exists —
+     each one is captioned with what the shot should be. */
+  .ph-texture {
+    position: relative;
+    background:
+      radial-gradient(120% 140% at 15% 10%, rgba(201, 166, 107, 0.16), transparent 55%),
+      linear-gradient(160deg, #1c1a16 0%, #100f0d 55%, rgba(8, 8, 7, 0.44) 100%);
+    overflow: hidden;
+  }
+  .ph-texture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      115deg,
+      rgba(244, 240, 232, 0.035) 0px,
+      rgba(244, 240, 232, 0.035) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    mix-blend-mode: overlay;
+    opacity: 0.5;
+  }
 
-@media (prefers-reduced-motion: reduce){
-  *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
-}
+  .menu-dots {
+    flex: 1;
+    border-bottom: 1px dotted rgba(244, 240, 232, 0.2);
+    position: relative;
+    top: -4px;
+  }
 
-/* nav */
-.nav-link{position:relative;font-size:12px;}
-.nav-link::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease);}
-.nav-link:hover::after{transform:scaleX(1);transform-origin:left;}
-.nav-scrolled{background:rgba(11,11,10,0.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:16px 0 !important;}
-#scrollArrow{animation:bob 2.2s ease-in-out infinite;}
-@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 180px;
+    gap: 14px;
+  }
+  .g-tall { grid-column: span 1; grid-row: span 3; }
+  .g-wide { grid-column: span 2; grid-row: span 2; }
+  .g-big  { grid-column: span 2; grid-row: span 2; }
+  @media (max-width: 860px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+    .g-tall { grid-row: span 2; }
+    .g-wide, .g-big { grid-column: span 2; }
+  }
 
-/* mobile nav */
-.mm-link{opacity:0;transform:translateY(24px);transition:all .5s var(--ease);}
-#mobileMenu.open .mm-link{opacity:1;transform:translateY(0);}
-#mobileMenu.open{transform:translateY(0);}
-.mb-line.open1{transform:translateY(3px) rotate(45deg);}
-.mb-line.open2{transform:translateY(-3px) rotate(-45deg);}
-
-/* image scale reveal */
-.img-scale{overflow:hidden;position:relative;}
-.img-scale .ph{transform:scale(1.08);transition:transform 1.4s var(--ease);}
-
-/* dishes */
-.dish-card{flex:0 0 340px;scroll-snap-align:start;}
-.dish-img{position:relative;height:420px;overflow:hidden;cursor:pointer;}
-.dish-img .ph{transition:transform .8s var(--ease);}
-.dish-card:hover .dish-img .ph{transform:scale(1.06);}
-.dish-arrow{position:absolute;top:20px;right:20px;width:38px;height:38px;border:1px solid rgba(244,240,232,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text);opacity:0;transform:translate(-8px,8px);transition:all .45s var(--ease);background:rgba(11,11,10,0.4);backdrop-filter:blur(6px);}
-.dish-card:hover .dish-arrow{opacity:1;transform:translate(0,0);}
-.dish-info{padding:22px 4px 10px;transition:transform .5s var(--ease);}
-.dish-card:hover .dish-info{transform:translateX(4px);}
-.dish-num{opacity:.5;transition:opacity .5s var(--ease);}
-.dish-card:hover .dish-num{opacity:1;}
-#dishRow{scroll-snap-type:x proximity;}
-
-/* fire words */
-.fire-word{opacity:.25;letter-spacing:.4em;transition:opacity .6s var(--ease);}
-.fire-word.active{opacity:1;}
-
-/* menu rows */
-.menu-row{display:flex;align-items:baseline;gap:10px;padding:14px 0;border-bottom:1px solid var(--border);font-size:16px;position:relative;transition:padding-left .4s var(--ease);}
-.menu-row:hover{padding-left:8px;}
-.menu-row:hover span:first-child{color:var(--gold);}
-.menu-dots{flex:1;border-bottom:1px dotted var(--border-strong);position:relative;top:-4px;}
-
-/* chat bubble preview */
-.chat-bubble{padding:16px 0;border-bottom:1px solid var(--border);}
-.chat-bubble:last-child{border-bottom:none;}
-
-/* gallery */
-.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:14px;}
-.g-tall{grid-column:span 1;grid-row:span 3;}
-.g-wide{grid-column:span 2;grid-row:span 2;}
-.g-big{grid-column:span 2;grid-row:span 2;}
-.gimg{position:relative;overflow:hidden;cursor:pointer;}
-.gimg .ph{transition:transform .8s var(--ease);}
-.gimg:hover .ph{transform:scale(1.045);}
-.gimg::before{content:'';position:absolute;inset:0;background:rgba(11,11,10,0.28);opacity:0;transition:opacity .5s var(--ease);z-index:1;}
-.gimg:hover::before{opacity:1;}
-.gimg-view{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:0;transform:translateY(10px);transition:all .5s var(--ease);}
-.gimg:hover .gimg-view{opacity:1;transform:translateY(0);}
-
-/* form */
-.field{display:flex;flex-direction:column;gap:8px;position:relative;}
-.field label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-soft);}
-.field input,.field select{
-  background:transparent;border:none;border-bottom:1px solid var(--border-strong);
-  color:var(--text);font-family:inherit;font-size:16px;padding:12px 4px;transition:border-color .4s var(--ease);
-}
-.field select option{background:#141311;}
-.field input:hover,.field select:hover{border-color:rgba(244,240,232,0.35);}
-.field input:focus,.field select:focus{border-color:var(--gold);}
-.field-error{display:none;font-size:12px;color:#D98066;}
-.field.error input,.field.error select{border-color:#D98066;}
-.field.error .field-error{display:block;}
-#reserveSubmit.loading .btn-label{opacity:0;}
-#reserveSubmit{position:relative;}
-#reserveSubmit .spinner{display:none;position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border:1.5px solid rgba(11,11,10,0.3);border-top-color:var(--bg);border-radius:50%;}
-#reserveSubmit.loading .spinner{display:block;animation:spin .7s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-
-.footer-link{transition:color .4s var(--ease);}
-.footer-link:hover{color:var(--gold);}
-
-/* AI concierge widget */
-#aiFabDot{display:inline-block;}
-#aiPanel{
-  position:fixed;bottom:100px;right:26px;width:380px;max-height:min(600px,72vh);
-  background:var(--surface);border:1px solid var(--border-strong);z-index:160;
-  display:flex;flex-direction:column;
-  transform:translateY(24px) scale(.97);opacity:0;pointer-events:none;
-  transition:all .45s var(--ease);
-  box-shadow:0 30px 60px rgba(0,0,0,0.5);
-}
-#aiPanel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto;}
-#aiPanelHeader{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--border);}
-#aiBody{padding:22px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:14px;}
-.ai-msg{max-width:85%;padding:12px 16px;font-size:14px;line-height:1.6;}
-.ai-msg-bot{background:rgba(244,240,232,0.06);border:1px solid var(--border);align-self:flex-start;}
-.ai-msg-user{background:var(--text);color:var(--bg);align-self:flex-end;}
-#aiQuick{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
-.ai-quick-btn{border:1px solid var(--border-strong);padding:9px 14px;font-size:12px;letter-spacing:.04em;transition:all .35s var(--ease);}
-.ai-quick-btn:hover{border-color:var(--gold);color:var(--gold);}
-#aiInputRow{display:flex;align-items:center;border-top:1px solid var(--border);padding:14px 18px;gap:12px;}
-#aiInput{flex:1;background:transparent;border:none;color:var(--text);font-family:inherit;font-size:14px;}
-#aiInput::placeholder{color:var(--text-soft);}
-#aiInputRow button{color:var(--gold);flex-shrink:0;}
-#aiOverlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:155;opacity:0;pointer-events:none;transition:opacity .45s var(--ease);}
-#aiOverlay.open{opacity:1;pointer-events:auto;}
-
-@media (max-width:860px){
-  #navLinks{display:none;}
-  #mobileBtn{display:flex !important;}
-  #experience .wrap,#story .wrap,#signature .wrap,#gallery .wrap,#location .wrap,#concierge .wrap,#menu .wrap{grid-template-columns:1fr !important;}
-  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}
-  .g-tall{grid-row:span 2;}
-  .g-wide,.g-big{grid-column:span 2;}
-  #reserveForm{grid-template-columns:1fr !important;}
-  #aiPanel{right:0;left:0;bottom:0;width:100%;max-height:88vh;border-left:none;border-right:none;}
-  .btn{padding:15px 26px;min-height:44px;}
-  .ai-quick-btn{min-height:44px;}
-}
+  /* initial hidden states for JS-driven reveals (avoid flash-of-unstyled on load) */
+  .js-hero-el { will-change: transform, opacity; }
 </style>
 </head>
-<body>
 
-<div id="loader" style="position:fixed;inset:0;background:#0B0B0A;z-index:999;"></div>
+<body class="font-sans font-light bg-bg text-ink antialiased overflow-x-hidden">
 
-<!-- ============ NAV ============ -->
-<nav id="mainNav" style="position:fixed;top:0;left:0;right:0;z-index:200;padding:28px 0;transition:all .6s var(--ease);">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;">
-    <a href="#" class="h-display" style="font-size:19px;letter-spacing:0.06em;">THE GRILL HOUSE</a>
-    <div id="navLinks" style="display:flex;align-items:center;gap:44px;">
-      <a href="#experience" class="nav-link" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;">Experience</a>
-      <a href="#menu" class="nav-link" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;">Menu</a>
-      <a href="#story" class="nav-link" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;">Our Story</a>
-      <a href="#gallery" class="nav-link" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;">Gallery</a>
-      <a href="#reserve" class="btn btn-ghost" style="padding:12px 24px;">Reserve a Table</a>
+<!-- ============================== NAV ============================== -->
+<nav id="siteNav" class="fixed top-0 inset-x-0 z-50 transition-all duration-500 ease-premium py-7 bg-transparent">
+  <div class="max-w-wrap mx-auto px-5 md:px-10 flex items-center justify-between">
+    <a href="#top" class="font-serif text-[19px] tracking-[0.06em]">THE GRILL HOUSE</a>
+
+    <div class="hidden md:flex items-center gap-11">
+      <a href="#experience" class="relative text-xs tracking-[0.12em] uppercase group">
+        Experience
+        <span class="absolute left-0 right-0 -bottom-1.5 h-px bg-gold scale-x-0 origin-right transition-transform duration-500 ease-premium group-hover:scale-x-100 group-hover:origin-left"></span>
+      </a>
+      <a href="#menu" class="relative text-xs tracking-[0.12em] uppercase group">
+        Menu
+        <span class="absolute left-0 right-0 -bottom-1.5 h-px bg-gold scale-x-0 origin-right transition-transform duration-500 ease-premium group-hover:scale-x-100 group-hover:origin-left"></span>
+      </a>
+      <a href="#story" class="relative text-xs tracking-[0.12em] uppercase group">
+        Our Story
+        <span class="absolute left-0 right-0 -bottom-1.5 h-px bg-gold scale-x-0 origin-right transition-transform duration-500 ease-premium group-hover:scale-x-100 group-hover:origin-left"></span>
+      </a>
+      <a href="#gallery" class="relative text-xs tracking-[0.12em] uppercase group">
+        Gallery
+        <span class="absolute left-0 right-0 -bottom-1.5 h-px bg-gold scale-x-0 origin-right transition-transform duration-500 ease-premium group-hover:scale-x-100 group-hover:origin-left"></span>
+      </a>
+      <a href="#reserve" class="group inline-flex items-center gap-2.5 text-xs tracking-[0.18em] uppercase font-medium px-6 py-3 border transition-all duration-500 ease-premium whitespace-nowrap text-ink border-line-strong hover:border-gold hover:text-gold">
+        Reserve a Table
+      </a>
     </div>
-    <button id="mobileBtn" aria-label="Open menu" aria-expanded="false" style="display:none;flex-direction:column;gap:5px;width:26px;">
-      <span class="mb-line" style="height:1px;background:var(--text);width:100%;transition:all .4s var(--ease);"></span>
-      <span class="mb-line" style="height:1px;background:var(--text);width:100%;transition:all .4s var(--ease);"></span>
+
+    <button id="mobileToggle" aria-label="Open menu" aria-expanded="false" class="md:hidden flex flex-col gap-1.5 w-6 min-h-[44px] min-w-[44px] items-center justify-center">
+      <span id="bar1" class="h-px w-6 bg-ink transition-all duration-400 ease-premium"></span>
+      <span id="bar2" class="h-px w-6 bg-ink transition-all duration-400 ease-premium"></span>
     </button>
   </div>
 </nav>
 
-<!-- Mobile full-screen menu -->
-<div id="mobileMenu" style="position:fixed;inset:0;background:#0B0B0A;z-index:190;display:flex;flex-direction:column;justify-content:center;padding:0 32px;transform:translateY(-100%);transition:transform .6s var(--ease);">
-  <div style="display:flex;flex-direction:column;gap:22px;">
-    <a href="#experience" class="mm-link h-display" style="font-size:38px;">Experience</a>
-    <a href="#menu" class="mm-link h-display" style="font-size:38px;">Menu</a>
-    <a href="#story" class="mm-link h-display" style="font-size:38px;">Our Story</a>
-    <a href="#gallery" class="mm-link h-display" style="font-size:38px;">Gallery</a>
-    <a href="#reserve" class="mm-link h-display" style="font-size:38px;color:var(--gold);">Reserve a Table</a>
+<div id="mobileMenu" class="fixed inset-0 z-40 bg-bg flex flex-col justify-center px-8 transition-transform duration-500 ease-premium md:hidden -translate-y-full">
+  <div class="flex flex-col gap-5">
+    <a href="#experience" class="mobile-link font-serif text-4xl transition-all duration-500 ease-premium">Experience</a>
+    <a href="#menu" class="mobile-link font-serif text-4xl transition-all duration-500 ease-premium">Menu</a>
+    <a href="#story" class="mobile-link font-serif text-4xl transition-all duration-500 ease-premium">Our Story</a>
+    <a href="#gallery" class="mobile-link font-serif text-4xl transition-all duration-500 ease-premium">Gallery</a>
+    <a href="#reserve" class="mobile-link font-serif text-4xl text-gold transition-all duration-500 ease-premium">Reserve a Table</a>
   </div>
-  <div style="margin-top:56px;color:var(--text-soft);font-size:13px;letter-spacing:.1em;">SYDNEY · AUSTRALIA<br>OPEN DAILY · 12PM — 11PM</div>
+  <div class="mt-14 text-ink-soft text-[13px] tracking-[0.1em]">
+    SYDNEY · AUSTRALIA<br />OPEN DAILY · 12PM — 11PM
+  </div>
 </div>
 
 <main id="top">
 
-<!-- ============ HERO ============ -->
-<section id="hero" style="position:relative;height:100vh;min-height:680px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;">
-  <div class="ph ph-inner" id="heroImg" data-tag="Hardwood Fire, Main Kitchen" style="position:absolute;inset:0;transform:scale(1.12);"></div>
-  <div style="position:absolute;inset:0;background:linear-gradient(0deg, #0B0B0A 0%, rgba(11,11,10,0.35) 45%, rgba(11,11,10,0.55) 100%);"></div>
-
-  <div class="wrap" style="position:relative;z-index:2;padding-bottom:64px;">
-    <div style="overflow:hidden;">
-      <h1 id="heroTitle" class="h-display" style="font-size:clamp(52px,10vw,150px);text-transform:uppercase;letter-spacing:-0.01em;transform:translateY(110%);">The Grill House</h1>
-    </div>
-    <div style="overflow:hidden;margin-top:6px;">
-      <p id="heroSub" class="label" style="font-size:14px;letter-spacing:.4em;transform:translateY(120%);">Fire. Flavor. Craft.</p>
-    </div>
-    <p id="heroCopy" class="body-text" style="max-width:420px;margin-top:22px;font-size:17px;opacity:0;">A modern steakhouse where every plate begins with fire.</p>
-
-    <div id="heroCtas" style="display:flex;gap:18px;flex-wrap:wrap;margin-top:38px;opacity:0;">
-      <a href="#reserve" class="btn btn-primary">Reserve a Table
-        <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="currentColor" stroke-width="1.2"/></svg>
-      </a>
-      <a href="#experience" class="btn btn-ghost">Explore the Experience</a>
-    </div>
-
-    <div id="heroMeta" style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:76px;flex-wrap:wrap;gap:20px;opacity:0;">
-      <div style="font-size:12px;letter-spacing:.15em;color:var(--text-soft);text-transform:uppercase;">
-        Sydney · Australia<br><span style="color:var(--text);">Open Daily · 12PM — 11PM</span>
+  <!-- ============================== HERO ============================== -->
+  <section class="relative h-screen min-h-[680px] flex flex-col justify-end overflow-hidden">
+    <div id="heroImg" class="absolute inset-0 js-hero-el">
+      <div class="ph-texture absolute inset-0">
+        <span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">
+          Chef finishing a steak over an open hardwood grill, flames visible
+        </span>
       </div>
-      <a href="#experience" id="scrollCue" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-soft);display:flex;align-items:center;gap:10px;">
-        Scroll to Explore
-        <span id="scrollArrow" style="display:inline-block;">↓</span>
-      </a>
     </div>
-  </div>
-</section>
+    <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/35 to-bg/55"></div>
 
-<!-- ============ EXPERIENCE ============ -->
-<section id="experience" style="padding:180px 0 140px;">
-  <div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
-    <div class="reveal-col">
-      <p class="label">The Experience</p>
-      <h2 class="h-display" style="font-size:clamp(34px,4.6vw,58px);margin-top:18px;text-transform:uppercase;">Where fire<br>becomes flavor.</h2>
-      <p class="body-text" style="margin-top:28px;max-width:420px;">We believe great dining is more than what arrives on the plate. It is the sound of the kitchen, the warmth of the room, the first cut through a perfectly prepared steak.</p>
-      <p class="body-text" style="margin-top:16px;max-width:420px;">Every element of The Grill House is considered — from the char on the crust to the silence before the first bite.</p>
-      <a href="#story" class="btn btn-ghost" style="margin-top:38px;">Discover Our Story
-        <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="currentColor" stroke-width="1.2"/></svg>
-      </a>
-    </div>
-    <div class="img-scale" style="height:560px;margin-top:60px;">
-      <div class="ph ph-inner" data-tag="The Open Kitchen"></div>
-    </div>
-  </div>
-</section>
+    <div class="relative z-10 max-w-wrap mx-auto w-full px-5 md:px-10 pb-16">
+      <div class="overflow-hidden md:ml-[8.33%]">
+        <p id="heroLabel" class="js-hero-el font-sans text-[11px] md:text-xs tracking-[0.4em] uppercase text-gold font-medium">
+          Sydney / Australia
+        </p>
+      </div>
+      <div class="overflow-hidden mt-2 md:ml-[8.33%]">
+        <h1 id="heroTitle" class="js-hero-el font-serif uppercase leading-[0.95] tracking-tight text-[52px] sm:text-[80px] md:text-[110px] lg:text-[136px]">
+          The Art<br />of Fire.
+        </h1>
+      </div>
+      <p id="heroCopy" class="js-hero-el font-sans font-light text-ink-soft leading-relaxed max-w-[420px] mt-6 text-[17px] md:ml-[8.33%]">
+        A modern steakhouse built around flame, craft and the finest cuts.
+      </p>
 
-<!-- ============ SIGNATURE DISHES ============ -->
-<section id="signature" style="padding:120px 0;border-top:1px solid var(--border);">
-  <div class="wrap">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:70px;">
+      <div id="heroCtas" class="js-hero-el flex gap-4 flex-wrap mt-9 md:ml-[8.33%]">
+        <a href="#reserve" class="group inline-flex items-center gap-2.5 text-xs tracking-[0.18em] uppercase font-medium px-8 py-[18px] border transition-all duration-500 ease-premium whitespace-nowrap bg-ink text-bg border-ink hover:bg-gold hover:border-gold">
+          Reserve a Table
+          <span class="transition-transform duration-500 ease-premium group-hover:translate-x-1">→</span>
+        </a>
+        <a href="#experience" class="group inline-flex items-center gap-2.5 text-xs tracking-[0.18em] uppercase font-medium px-8 py-[18px] border transition-all duration-500 ease-premium whitespace-nowrap text-ink border-line-strong hover:border-gold hover:text-gold">
+          Discover the Experience
+        </a>
+      </div>
+
+      <div id="heroMeta" class="js-hero-el flex justify-between items-end flex-wrap gap-5 mt-16 md:ml-[8.33%]">
+        <div class="text-xs tracking-[0.15em] uppercase text-ink-soft">
+          Open Daily<br /><span class="text-ink">12PM — 11PM</span>
+        </div>
+        <a href="#experience" class="text-[11px] tracking-[0.18em] uppercase text-ink-soft flex items-center gap-2.5">
+          Scroll to Explore
+          <span class="animate-bounce inline-block">↓</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== EXPERIENCE ============================== -->
+  <section id="experience" class="py-32 md:py-44">
+    <div class="max-w-wrap mx-auto px-5 md:px-10 grid md:grid-cols-2 gap-16 md:gap-20 items-center">
+      <div id="experienceCol">
+        <p class="reveal-item font-sans text-[11px] tracking-[0.28em] uppercase text-gold font-medium">The Experience</p>
+        <h2 class="reveal-item font-serif uppercase text-[34px] md:text-[58px] leading-[1.02] mt-4">
+          Where fire<br />becomes flavor.
+        </h2>
+        <p class="reveal-item font-sans font-light text-ink-soft leading-relaxed max-w-[420px] mt-7">
+          We believe great dining is more than what arrives on the plate. It is the sound of
+          the kitchen, the warmth of the room, the first cut through a perfectly prepared steak.
+        </p>
+        <p class="reveal-item font-sans font-light text-ink-soft leading-relaxed max-w-[420px] mt-4">
+          Every element of The Grill House is considered — from the char on the crust to the
+          silence before the first bite.
+        </p>
+        <a href="#story" class="reveal-item group inline-flex items-center gap-2.5 text-xs tracking-[0.18em] uppercase font-medium px-8 py-[18px] border transition-all duration-500 ease-premium whitespace-nowrap text-ink border-line-strong hover:border-gold hover:text-gold mt-9">
+          Discover Our Story
+          <span class="transition-transform duration-500 ease-premium group-hover:translate-x-1">→</span>
+        </a>
+      </div>
+      <div id="experienceImg" class="relative h-[420px] md:h-[560px] mt-8 md:mt-16 overflow-hidden">
+        <div class="ph-texture absolute inset-0">
+          <span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">The open kitchen at The Grill House mid-service</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== SIGNATURE CUTS ============================== -->
+  <section id="signature" class="py-24 md:py-32 border-t border-line">
+    <div class="max-w-wrap mx-auto px-5 md:px-10 flex justify-between items-end flex-wrap gap-5 mb-14 md:mb-16">
       <div>
-        <p class="label">From The Fire</p>
-        <h2 class="h-display" style="font-size:clamp(34px,4.6vw,56px);margin-top:16px;text-transform:uppercase;">Signature Cuts</h2>
+        <p class="font-sans text-[11px] tracking-[0.28em] uppercase text-gold font-medium">From The Fire</p>
+        <h2 class="font-serif uppercase text-[34px] md:text-[56px] leading-[1.02] mt-4">Signature Cuts</h2>
       </div>
-      <p class="body-text" style="max-width:340px;">Our signature cuts, crafted with patience and finished over open flame.</p>
-    </div>
-  </div>
-
-  <div id="dishRow" style="display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding:0 clamp(20px,5vw,80px);">
-    <style>#dishRow::-webkit-scrollbar{display:none;}</style>
-
-    <div class="dish-card" data-n="01">
-      <div class="dish-img"><div class="ph ph-inner" data-tag="Ribeye"></div><span class="dish-arrow">→</span></div>
-      <div class="dish-info">
-        <span class="dish-num label">01</span>
-        <h3 class="h-display" style="font-size:26px;margin-top:10px;">The Signature Ribeye</h3>
-        <p style="font-size:12px;color:var(--text-soft);letter-spacing:.08em;margin-top:4px;">300G</p>
-        <p class="body-text" style="font-size:14px;margin-top:10px;">Charred over hardwood fire, finished with smoked sea salt.</p>
-        <p class="h-display" style="color:var(--gold);font-size:22px;margin-top:14px;">$48</p>
-      </div>
+      <p class="font-sans font-light text-ink-soft max-w-[340px]">
+        Our signature cuts, crafted with patience and finished over open flame.
+      </p>
     </div>
 
-    <div class="dish-card" data-n="02">
-      <div class="dish-img"><div class="ph ph-inner" data-tag="Tenderloin"></div><span class="dish-arrow">→</span></div>
-      <div class="dish-info">
-        <span class="dish-num label">02</span>
-        <h3 class="h-display" style="font-size:26px;margin-top:10px;">Black Garlic Tenderloin</h3>
-        <p style="font-size:12px;color:var(--text-soft);letter-spacing:.08em;margin-top:4px;">250G</p>
-        <p class="body-text" style="font-size:14px;margin-top:10px;">Slow-roasted, glazed with fermented black garlic butter.</p>
-        <p class="h-display" style="color:var(--gold);font-size:22px;margin-top:14px;">$52</p>
+    <div class="flex gap-0.5 overflow-x-auto px-5 md:px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" style="scroll-snap-type: x proximity;">
+      <!-- dish card template x4 -->
+      <div class="dish-card group flex-none w-[300px] md:w-[340px]" style="scroll-snap-align:start;">
+        <div class="relative h-[380px] md:h-[420px] overflow-hidden cursor-pointer">
+          <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.06]">
+            <div class="ph-texture absolute inset-0"><span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">The Signature Ribeye, plated with smoked sea salt</span></div>
+          </div>
+          <span class="absolute top-5 right-5 w-9 h-9 rounded-full border border-ink/30 bg-bg/40 backdrop-blur-sm flex items-center justify-center opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">→</span>
+        </div>
+        <div class="pt-5 pb-2.5 px-1 transition-transform duration-500 ease-premium group-hover:translate-x-1">
+          <span class="text-[11px] tracking-[0.28em] uppercase text-gold font-medium opacity-50 transition-opacity duration-500 group-hover:opacity-100">01</span>
+          <h3 class="font-serif text-2xl mt-2.5">The Signature Ribeye</h3>
+          <p class="text-[12px] text-ink-soft tracking-[0.08em] mt-1">300G</p>
+          <p class="font-sans font-light text-ink-soft text-sm mt-2.5">Charred over hardwood fire, finished with smoked sea salt.</p>
+          <p class="font-serif text-gold text-[22px] mt-3.5">$48</p>
+        </div>
+      </div>
+
+      <div class="dish-card group flex-none w-[300px] md:w-[340px]" style="scroll-snap-align:start;">
+        <div class="relative h-[380px] md:h-[420px] overflow-hidden cursor-pointer">
+          <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.06]">
+            <div class="ph-texture absolute inset-0"><span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">Black Garlic Tenderloin plated with glaze</span></div>
+          </div>
+          <span class="absolute top-5 right-5 w-9 h-9 rounded-full border border-ink/30 bg-bg/40 backdrop-blur-sm flex items-center justify-center opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">→</span>
+        </div>
+        <div class="pt-5 pb-2.5 px-1 transition-transform duration-500 ease-premium group-hover:translate-x-1">
+          <span class="text-[11px] tracking-[0.28em] uppercase text-gold font-medium opacity-50 transition-opacity duration-500 group-hover:opacity-100">02</span>
+          <h3 class="font-serif text-2xl mt-2.5">Black Garlic Tenderloin</h3>
+          <p class="text-[12px] text-ink-soft tracking-[0.08em] mt-1">250G</p>
+          <p class="font-sans font-light text-ink-soft text-sm mt-2.5">Slow-roasted, glazed with fermented black garlic butter.</p>
+          <p class="font-serif text-gold text-[22px] mt-3.5">$52</p>
+        </div>
+      </div>
+
+      <div class="dish-card group flex-none w-[300px] md:w-[340px]" style="scroll-snap-align:start;">
+        <div class="relative h-[380px] md:h-[420px] overflow-hidden cursor-pointer">
+          <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.06]">
+            <div class="ph-texture absolute inset-0"><span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">Fire-grilled lamb chops with charred lemon</span></div>
+          </div>
+          <span class="absolute top-5 right-5 w-9 h-9 rounded-full border border-ink/30 bg-bg/40 backdrop-blur-sm flex items-center justify-center opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">→</span>
+        </div>
+        <div class="pt-5 pb-2.5 px-1 transition-transform duration-500 ease-premium group-hover:translate-x-1">
+          <span class="text-[11px] tracking-[0.28em] uppercase text-gold font-medium opacity-50 transition-opacity duration-500 group-hover:opacity-100">03</span>
+          <h3 class="font-serif text-2xl mt-2.5">Fire-Grilled Lamb Chops</h3>
+          <p class="text-[12px] text-ink-soft tracking-[0.08em] mt-1">4 PIECES</p>
+          <p class="font-sans font-light text-ink-soft text-sm mt-2.5">Rosemary smoke, charred lemon, natural jus.</p>
+          <p class="font-serif text-gold text-[22px] mt-3.5">$44</p>
+        </div>
+      </div>
+
+      <div class="dish-card group flex-none w-[300px] md:w-[340px]" style="scroll-snap-align:start;">
+        <div class="relative h-[380px] md:h-[420px] overflow-hidden cursor-pointer">
+          <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.06]">
+            <div class="ph-texture absolute inset-0"><span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">The Tomahawk steak presented tableside</span></div>
+          </div>
+          <span class="absolute top-5 right-5 w-9 h-9 rounded-full border border-ink/30 bg-bg/40 backdrop-blur-sm flex items-center justify-center opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">→</span>
+        </div>
+        <div class="pt-5 pb-2.5 px-1 transition-transform duration-500 ease-premium group-hover:translate-x-1">
+          <span class="text-[11px] tracking-[0.28em] uppercase text-gold font-medium opacity-50 transition-opacity duration-500 group-hover:opacity-100">04</span>
+          <h3 class="font-serif text-2xl mt-2.5">The Tomahawk, To Share</h3>
+          <p class="text-[12px] text-ink-soft tracking-[0.08em] mt-1">900G</p>
+          <p class="font-sans font-light text-ink-soft text-sm mt-2.5">Dry-aged 35 days, finished tableside over coals.</p>
+          <p class="font-serif text-gold text-[22px] mt-3.5">$120</p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="dish-card" data-n="03">
-      <div class="dish-img"><div class="ph ph-inner" data-tag="Lamb Chops"></div><span class="dish-arrow">→</span></div>
-      <div class="dish-info">
-        <span class="dish-num label">03</span>
-        <h3 class="h-display" style="font-size:26px;margin-top:10px;">Fire-Grilled Lamb Chops</h3>
-        <p style="font-size:12px;color:var(--text-soft);letter-spacing:.08em;margin-top:4px;">4 PIECES</p>
-        <p class="body-text" style="font-size:14px;margin-top:10px;">Rosemary smoke, charred lemon, natural jus.</p>
-        <p class="h-display" style="color:var(--gold);font-size:22px;margin-top:14px;">$44</p>
+  <!-- ============================== FIRE STORY (pinned) ============================== -->
+  <section id="fireStory" class="relative h-screen min-h-[600px]">
+    <div class="absolute inset-0">
+      <div class="ph-texture absolute inset-0"><span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">Close-up of hardwood coals and open flame</span></div>
+    </div>
+    <div class="absolute inset-0 bg-bg/55"></div>
+    <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+      <h2 class="font-serif uppercase text-[32px] sm:text-[48px] md:text-[80px] leading-[1.05]">
+        Cooked with fire.<br />Not shortcuts.
+      </h2>
+      <div class="flex gap-6 md:gap-9 mt-12 md:mt-14 flex-wrap justify-center">
+        <span class="fire-word text-sm tracking-[0.4em] uppercase text-gold font-medium transition-opacity duration-500 ease-premium opacity-25">Wood</span>
+        <span class="fire-word text-sm tracking-[0.4em] uppercase text-gold font-medium transition-opacity duration-500 ease-premium opacity-25">Flame</span>
+        <span class="fire-word text-sm tracking-[0.4em] uppercase text-gold font-medium transition-opacity duration-500 ease-premium opacity-25">Steel</span>
+        <span class="fire-word text-sm tracking-[0.4em] uppercase text-gold font-medium transition-opacity duration-500 ease-premium opacity-25">Time</span>
       </div>
     </div>
+  </section>
 
-    <div class="dish-card" data-n="04">
-      <div class="dish-img"><div class="ph ph-inner" data-tag="Tomahawk"></div><span class="dish-arrow">→</span></div>
-      <div class="dish-info">
-        <span class="dish-num label">04</span>
-        <h3 class="h-display" style="font-size:26px;margin-top:10px;">The Tomahawk, To Share</h3>
-        <p style="font-size:12px;color:var(--text-soft);letter-spacing:.08em;margin-top:4px;">900G</p>
-        <p class="body-text" style="font-size:14px;margin-top:10px;">Dry-aged 35 days, finished tableside over coals.</p>
-        <p class="h-display" style="color:var(--gold);font-size:22px;margin-top:14px;">$120</p>
+  <!-- ============================== OUR STORY ============================== -->
+  <section id="story" class="py-32 md:py-40">
+    <div class="max-w-wrap mx-auto px-5 md:px-10 grid md:grid-cols-[0.9fr_1.1fr] gap-16 md:gap-20 items-center">
+      <div id="storyImg" class="relative h-[420px] md:h-[600px] overflow-hidden">
+        <div class="ph-texture absolute inset-0"><span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">Founder or head chef portrait in the dining room</span></div>
+      </div>
+      <div id="storyCol" class="max-w-[460px]">
+        <p class="reveal-item font-sans text-[11px] tracking-[0.28em] uppercase text-gold font-medium">Our Story</p>
+        <h2 class="reveal-item font-serif text-[32px] md:text-[52px] leading-[1.08] mt-4">
+          Born from a love of fire, craft and honest ingredients.
+        </h2>
+        <p class="reveal-item font-sans font-light text-ink-soft leading-relaxed mt-6">
+          The Grill House began with a single question: what happens when you strip a
+          steakhouse back to what matters? No shortcuts, no gimmicks — just fire, time, and
+          ingredients treated with respect.
+        </p>
+        <p class="reveal-item font-sans font-light text-ink-soft leading-relaxed mt-4">
+          Today, that same philosophy shapes every plate that leaves our kitchen.
+        </p>
+        <a href="#" class="reveal-item group inline-flex items-center gap-2.5 text-xs tracking-[0.18em] uppercase font-medium px-8 py-[18px] border transition-all duration-500 ease-premium whitespace-nowrap text-ink border-line-strong hover:border-gold hover:text-gold mt-8">
+          Discover Our Story
+          <span class="transition-transform duration-500 ease-premium group-hover:translate-x-1">→</span>
+        </a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ FIRE STORY ============ -->
-<section id="fireStory" style="position:relative;height:100vh;min-height:600px;">
-  <div class="ph ph-inner" data-tag="Open Flame, Hardwood Coals" style="position:absolute;inset:0;"></div>
-  <div style="position:absolute;inset:0;background:rgba(11,11,10,0.55);"></div>
-  <div style="position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
-    <h2 class="h-display" style="font-size:clamp(32px,6vw,80px);text-transform:uppercase;line-height:1.05;">Cooked with fire.<br>Not shortcuts.</h2>
-    <div id="fireWords" style="display:flex;gap:34px;margin-top:56px;flex-wrap:wrap;justify-content:center;">
-      <span class="fire-word label" style="font-size:14px;">Wood</span>
-      <span class="fire-word label" style="font-size:14px;">Flame</span>
-      <span class="fire-word label" style="font-size:14px;">Steel</span>
-      <span class="fire-word label" style="font-size:14px;">Time</span>
-    </div>
-  </div>
-</section>
+  <!-- ============================== MENU PREVIEW ============================== -->
+  <section id="menu" class="py-24 md:py-32 border-t border-line">
+    <div class="max-w-wrap mx-auto px-5 md:px-10 grid md:grid-cols-2 gap-14 md:gap-[70px]">
+      <div>
+        <p class="font-sans text-[11px] tracking-[0.28em] uppercase text-gold font-medium">The Menu</p>
+        <h2 class="font-serif uppercase text-[34px] md:text-[56px] leading-[1.02] mt-4">A Menu Built<br />on Fire.</h2>
 
-<!-- ============ OUR STORY ============ -->
-<section id="story" style="padding:160px 0;">
-  <div class="wrap" style="display:grid;grid-template-columns:0.9fr 1.1fr;gap:80px;align-items:center;">
-    <div class="img-scale" style="height:600px;">
-      <div class="ph ph-inner" data-tag="Est. Sydney"></div>
-    </div>
-    <div style="max-width:460px;">
-      <p class="label">Our Story</p>
-      <h2 class="h-display" style="font-size:clamp(32px,4.4vw,52px);margin-top:16px;">Born from a love of fire, craft and honest ingredients.</h2>
-      <p class="body-text" style="margin-top:26px;">The Grill House began with a single question: what happens when you strip a steakhouse back to what matters? No shortcuts, no gimmicks — just fire, time, and ingredients treated with respect.</p>
-      <p class="body-text" style="margin-top:16px;">Today, that same philosophy shapes every plate that leaves our kitchen.</p>
-      <a href="#" class="btn btn-ghost" style="margin-top:34px;">Discover Our Story
-        <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="currentColor" stroke-width="1.2"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
+        <div class="mt-14 space-y-10">
+          <div>
+            <p class="text-[11px] tracking-[0.24em] uppercase text-gold font-medium">Starters</p>
+            <div class="mt-2">
+              <div class="flex items-baseline gap-2.5 py-3.5 border-b border-line text-base transition-[padding] duration-400 ease-premium hover:pl-2 group">
+                <span class="transition-colors duration-400 group-hover:text-gold">Charred Octopus</span>
+                <span class="menu-dots"></span>
+                <span class="font-serif">$24</span>
+              </div>
+              <div class="flex items-baseline gap-2.5 py-3.5 border-b border-line text-base transition-[padding] duration-400 ease-premium hover:pl-2 group">
+                <span class="transition-colors duration-400 group-hover:text-gold">Burrata, Charred Fig</span>
+                <span class="menu-dots"></span>
+                <span class="font-serif">$22</span>
+              </div>
+              <div class="flex items-baseline gap-2.5 py-3.5 border-b border-line text-base transition-[padding] duration-400 ease-premium hover:pl-2 group">
+                <span class="transition-colors duration-400 group-hover:text-gold">Beef Tartare</span>
+                <span class="menu-dots"></span>
+                <span class="font-serif">$26</span>
+              </div>
+            </div>
+          </div>
 
-<!-- ============ MENU PREVIEW ============ -->
-<section id="menu" style="padding:120px 0;border-top:1px solid var(--border);">
-  <div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:70px;">
-    <div>
-      <p class="label">The Menu</p>
-      <h2 class="h-display" style="font-size:clamp(34px,4.6vw,56px);margin-top:16px;text-transform:uppercase;">A Menu Built<br>on Fire.</h2>
+          <div>
+            <p class="text-[11px] tracking-[0.24em] uppercase text-gold font-medium">From The Fire</p>
+            <div class="mt-2">
+              <div class="flex items-baseline gap-2.5 py-3.5 border-b border-line text-base transition-[padding] duration-400 ease-premium hover:pl-2 group">
+                <span class="transition-colors duration-400 group-hover:text-gold">Signature Ribeye 300g</span>
+                <span class="menu-dots"></span>
+                <span class="font-serif">$48</span>
+              </div>
+              <div class="flex items-baseline gap-2.5 py-3.5 border-b border-line text-base transition-[padding] duration-400 ease-premium hover:pl-2 group">
+                <span class="transition-colors duration-400 group-hover:text-gold">Black Garlic Tenderloin</span>
+                <span class="menu-dots"></span>
+                <span class="font-serif">$52</span>
+              </div>
+              <div class="flex items-baseline gap-2.5 py-3.5 border-b border-line text-base transition-[padding] duration-400 ease-premium hover:pl-2 group">
+                <span class="transition-colors duration-400 group-hover:text-gold">Lamb Chops</span>
+                <span class="menu-dots"></span>
+                <span class="font-serif">$44</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <div style="margin-top:56px;">
-        <p class="label" style="letter-spacing:.24em;">Starters</p>
-        <div class="menu-row" data-tag="Octopus"><span>Charred Octopus</span><span class="menu-dots"></span><span class="h-display">$24</span></div>
-        <div class="menu-row" data-tag="Burrata"><span>Burrata, Charred Fig</span><span class="menu-dots"></span><span class="h-display">$22</span></div>
-        <div class="menu-row" data-tag="Tartare"><span>Beef Tartare</span><span class="menu-dots"></span><span class="h-display">$26</span></div>
+        <a href="#" class="group inline-flex items-center gap-2.5 text-xs tracking-[0.18em] uppercase font-medium px-8 py-[18px] border transition-all duration-500 ease-premium whitespace-nowrap bg-ink text-bg border-ink hover:bg-gold hover:border-gold mt-12">
+          View Full Menu
+        </a>
       </div>
 
-      <div style="margin-top:40px;">
-        <p class="label" style="letter-spacing:.24em;">From The Fire</p>
-        <div class="menu-row" data-tag="Ribeye"><span>Signature Ribeye 300g</span><span class="menu-dots"></span><span class="h-display">$48</span></div>
-        <div class="menu-row" data-tag="Tenderloin"><span>Black Garlic Tenderloin</span><span class="menu-dots"></span><span class="h-display">$52</span></div>
-        <div class="menu-row" data-tag="Lamb Chops"><span>Lamb Chops</span><span class="menu-dots"></span><span class="h-display">$44</span></div>
-      </div>
-
-      <a href="#" class="btn btn-primary" style="margin-top:48px;">View Full Menu</a>
-    </div>
-
-    <div id="menuPreviewImg" class="ph ph-inner" data-tag="Signature Ribeye" style="min-height:480px;"></div>
-  </div>
-</section>
-
-<!-- ============ AI CONCIERGE SECTION ============ -->
-<section id="concierge" style="padding:140px 0;border-top:1px solid var(--border);background:var(--surface);">
-  <div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
-    <div>
-      <p class="label">Your Digital Concierge</p>
-      <h2 class="h-display" style="font-size:clamp(32px,4.4vw,54px);margin-top:16px;text-transform:uppercase;">Have a question?<br>Ask.</h2>
-      <p class="body-text" style="margin-top:26px;max-width:420px;">From menu questions to table bookings, our AI Concierge is on hand day and night — instant, considered answers, in the same tone as the room itself.</p>
-      <button class="btn btn-primary" id="openConciergeBtn" style="margin-top:38px;">Ask the Concierge</button>
-    </div>
-
-    <div style="border:1px solid var(--border);background:var(--bg);padding:28px;">
-      <div class="chat-bubble chat-user">
-        <p class="label" style="color:var(--text-soft);">You</p>
-        <p style="margin-top:6px;font-size:15px;">Do you have vegetarian options?</p>
-      </div>
-      <div class="chat-bubble chat-ai">
-        <p class="label">The Grill House AI</p>
-        <p style="margin-top:6px;font-size:15px;color:var(--text);">Absolutely. We have several vegetarian dishes available, including our charred seasonal vegetables and burrata.</p>
-      </div>
-      <div class="chat-bubble chat-user">
-        <p class="label" style="color:var(--text-soft);">You</p>
-        <p style="margin-top:6px;font-size:15px;">Can I book a table for 4 tonight?</p>
-      </div>
-      <div class="chat-bubble chat-ai" style="margin-bottom:0;">
-        <p class="label">The Grill House AI</p>
-        <p style="margin-top:6px;font-size:15px;color:var(--text);">Of course. I can help you with that.</p>
+      <div class="relative min-h-[400px] md:min-h-[480px]">
+        <div class="ph-texture absolute inset-0"><span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">Signature Ribeye close-up for the menu section</span></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ GALLERY ============ -->
-<section id="gallery" style="padding:120px 0;">
-  <div class="wrap">
-    <p class="label">Gallery</p>
-    <h2 class="h-display" style="font-size:clamp(34px,4.6vw,56px);margin-top:16px;text-transform:uppercase;margin-bottom:60px;">Moments From The Room</h2>
-
-    <div class="gallery-grid">
-      <div class="g-tall gimg ph" data-tag="The Dining Room"><span class="gimg-view">View →</span></div>
-      <div class="g-wide gimg ph" data-tag="The Grill"><span class="gimg-view">View →</span></div>
-      <div class="gimg ph" data-tag="Wine List"><span class="gimg-view">View →</span></div>
-      <div class="g-big gimg ph" data-tag="Chef at Work"><span class="gimg-view">View →</span></div>
-      <div class="gimg ph" data-tag="Table Setting"><span class="gimg-view">View →</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TESTIMONIAL ============ -->
-<section style="padding:160px 0;text-align:center;">
-  <div class="wrap" style="max-width:780px;">
-    <p class="h-display" style="font-size:clamp(28px,4vw,44px);font-style:italic;line-height:1.3;">"An unforgettable evening from the first course to the last."</p>
-    <p class="label" style="margin-top:32px;letter-spacing:.2em;">— Emma R.</p>
-    <p style="color:var(--gold);margin-top:10px;letter-spacing:.2em;">★★★★★</p>
-  </div>
-</section>
-
-<!-- ============ RESERVATIONS ============ -->
-<section id="reserve" style="padding:140px 0;border-top:1px solid var(--border);background:var(--surface);">
-  <div class="wrap" style="max-width:900px;">
-    <p class="label">Reservations</p>
-    <h2 class="h-display" style="font-size:clamp(34px,4.6vw,58px);margin-top:16px;text-transform:uppercase;">Your Table Awaits.</h2>
-
-    <form id="reserveForm" style="margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:28px 32px;" novalidate>
-      <div class="field">
-        <label for="r-date">Date</label>
-        <input id="r-date" name="date" type="date" required />
-        <span class="field-error">Please choose a date.</span>
-      </div>
-      <div class="field">
-        <label for="r-guests">Guests</label>
-        <select id="r-guests" name="guests" required>
-          <option value="">Select</option>
-          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6+</option>
-        </select>
-        <span class="field-error">Please select party size.</span>
-      </div>
-      <div class="field">
-        <label for="r-time">Time</label>
-        <input id="r-time" name="time" type="time" required />
-        <span class="field-error">Please choose a time.</span>
-      </div>
-      <div class="field">
-        <label for="r-name">Name</label>
-        <input id="r-name" name="name" type="text" placeholder="Full name" required />
-        <span class="field-error">Please enter your name.</span>
-      </div>
-      <div class="field" style="grid-column:1/-1;">
-        <label for="r-phone">Phone</label>
-        <input id="r-phone" name="phone" type="tel" placeholder="+61 4XX XXX XXX" required />
-        <span class="field-error">Please enter a valid phone number.</span>
-      </div>
-
-      <div style="grid-column:1/-1;margin-top:12px;">
-        <button type="submit" class="btn btn-primary" id="reserveSubmit" style="width:100%;justify-content:center;">
-          <span class="btn-label">Find a Table</span>
+  <!-- ============================== CONCIERGE SECTION ============================== -->
+  <section id="concierge" class="py-28 md:py-36 border-t border-line bg-surface">
+    <div class="max-w-wrap mx-auto px-5 md:px-10 grid md:grid-cols-2 gap-16 md:gap-20 items-center">
+      <div>
+        <p class="font-sans text-[11px] tracking-[0.28em] uppercase text-gold font-medium">Your Digital Concierge</p>
+        <h2 class="font-serif uppercase text-[32px] md:text-[54px] leading-[1.05] mt-4">Have a question?<br />Ask.</h2>
+        <p class="font-sans font-light text-ink-soft leading-relaxed max-w-[420px] mt-6">
+          From menu questions to table bookings, our Concierge is on hand day and night —
+          instant, considered answers, in the same tone as the room itself.
+        </p>
+        <button id="openConciergeFromSection" class="group inline-flex items-center gap-2.5 text-xs tracking-[0.18em] uppercase font-medium px-8 py-[18px] border transition-all duration-500 ease-premium whitespace-nowrap bg-ink text-bg border-ink hover:bg-gold hover:border-gold mt-9">
+          Ask the Concierge
         </button>
-        <p id="reserveSuccess" style="display:none;margin-top:18px;font-size:14px;color:var(--gold);text-align:center;">Thank you — your request has been received. We'll confirm shortly.</p>
       </div>
-    </form>
-  </div>
-</section>
 
-<!-- ============ LOCATION ============ -->
-<section id="location" style="padding:120px 0;">
-  <div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
-    <div>
-      <p class="label">Find Us</p>
-      <h2 class="h-display" style="font-size:clamp(32px,4.4vw,50px);margin-top:16px;">123 Example Street<br>Sydney NSW</h2>
-      <div style="margin-top:36px;color:var(--text-soft);line-height:2;font-size:15px;">
-        Monday — Sunday<br>
-        <span style="color:var(--text);">12:00 PM — 11:00 PM</span>
+      <div class="border border-line bg-bg p-6 md:p-7">
+        <div class="py-4 border-b border-line">
+          <p class="text-[11px] tracking-[0.28em] uppercase font-medium text-ink-soft">Guest</p>
+          <p class="text-[15px] mt-1.5">Do you have vegetarian options?</p>
+        </div>
+        <div class="py-4 border-b border-line">
+          <p class="text-[11px] tracking-[0.28em] uppercase font-medium text-gold">Concierge</p>
+          <p class="text-[15px] mt-1.5">Yes — charred seasonal vegetables and burrata are both on tonight.</p>
+        </div>
+        <div class="py-4 border-b border-line">
+          <p class="text-[11px] tracking-[0.28em] uppercase font-medium text-ink-soft">Guest</p>
+          <p class="text-[15px] mt-1.5">Can I book a table for 4 tonight?</p>
+        </div>
+        <div class="py-4">
+          <p class="text-[11px] tracking-[0.28em] uppercase font-medium text-gold">Concierge</p>
+          <p class="text-[15px] mt-1.5">Of course. Let me check what we have.</p>
+        </div>
       </div>
-      <div style="margin-top:26px;color:var(--text-soft);line-height:2;font-size:15px;">
-        Phone <span style="color:var(--text);">(02) 5550 1234</span><br>
-        Email <span style="color:var(--text);">reservations@thegrillhouse.com.au</span>
+    </div>
+  </section>
+
+  <!-- ============================== GALLERY ============================== -->
+  <section id="gallery" class="py-24 md:py-32">
+    <div class="max-w-wrap mx-auto px-5 md:px-10">
+      <p class="font-sans text-[11px] tracking-[0.28em] uppercase text-gold font-medium">Gallery</p>
+      <h2 class="font-serif uppercase text-[34px] md:text-[56px] leading-[1.02] mt-4 mb-14">Moments From The Room</h2>
+
+      <div class="gallery-grid">
+        <div class="g-item g-tall relative overflow-hidden cursor-pointer group">
+          <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.045]">
+            <div class="ph-texture absolute inset-0"><span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">The main dining room</span></div>
+          </div>
+          <div class="absolute inset-0 bg-bg/28 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
+          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
+        </div>
+        <div class="g-item g-wide relative overflow-hidden cursor-pointer group">
+          <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.045]">
+            <div class="ph-texture absolute inset-0"><span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">The grill station mid-service</span></div>
+          </div>
+          <div class="absolute inset-0 bg-bg/28 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
+          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
+        </div>
+        <div class="g-item relative overflow-hidden cursor-pointer group">
+          <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.045]">
+            <div class="ph-texture absolute inset-0"><span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">Wine list and glassware</span></div>
+          </div>
+          <div class="absolute inset-0 bg-bg/28 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
+          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
+        </div>
+        <div class="g-item g-big relative overflow-hidden cursor-pointer group">
+          <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.045]">
+            <div class="ph-texture absolute inset-0"><span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">Chef at work over the fire</span></div>
+          </div>
+          <div class="absolute inset-0 bg-bg/28 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
+          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
+        </div>
+        <div class="g-item relative overflow-hidden cursor-pointer group">
+          <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.045]">
+            <div class="ph-texture absolute inset-0"><span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">A set table, candlelight</span></div>
+          </div>
+          <div class="absolute inset-0 bg-bg/28 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
+          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
+        </div>
       </div>
-      <a href="#" class="btn btn-ghost" style="margin-top:38px;">Get Directions
-        <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="currentColor" stroke-width="1.2"/></svg>
+    </div>
+  </section>
+
+  <!-- ============================== TESTIMONIAL ============================== -->
+  <section class="py-32 md:py-40 text-center">
+    <div class="max-w-wrap mx-auto px-5 md:px-10 max-w-[780px]">
+      <p class="font-serif italic text-[28px] md:text-[44px] leading-[1.3]">
+        &ldquo;One of those places where everything feels considered — even the bread.&rdquo;
+      </p>
+      <p class="text-[11px] tracking-[0.28em] uppercase text-gold font-medium mt-8">— Emma R.</p>
+      <p class="text-gold tracking-[0.2em] mt-2.5">★★★★★</p>
+    </div>
+  </section>
+
+  <!-- ============================== RESERVATIONS ============================== -->
+  <section id="reserve" class="py-28 md:py-36 border-t border-line bg-surface">
+    <div class="max-w-wrap mx-auto px-5 md:px-10 max-w-[900px]">
+      <p class="font-sans text-[11px] tracking-[0.28em] uppercase text-gold font-medium">Reservations</p>
+      <h2 class="font-serif uppercase text-[34px] md:text-[58px] leading-[1.02] mt-4">Your Table Awaits.</h2>
+
+      <form id="reservationForm" novalidate class="mt-14 grid md:grid-cols-2 gap-7 md:gap-8">
+        <div class="flex flex-col gap-2">
+          <label for="date" class="text-[11px] tracking-[0.18em] uppercase text-ink-soft">Date</label>
+          <input id="date" name="date" type="date" class="field bg-transparent border-b border-line-strong text-[16px] py-3 px-1 transition-colors duration-400 outline-none hover:border-line-strong focus:border-gold" />
+          <span class="field-error hidden text-xs" style="color:#D98066;">This field is required.</span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="guests" class="text-[11px] tracking-[0.18em] uppercase text-ink-soft">Guests</label>
+          <select id="guests" name="guests" class="field bg-transparent border-b border-line-strong text-[16px] py-3 px-1 transition-colors duration-400 outline-none hover:border-line-strong focus:border-gold">
+            <option value="" disabled selected>Select</option>
+            <option value="1" class="bg-surface">1</option>
+            <option value="2" class="bg-surface">2</option>
+            <option value="3" class="bg-surface">3</option>
+            <option value="4" class="bg-surface">4</option>
+            <option value="5" class="bg-surface">5</option>
+            <option value="6+" class="bg-surface">6+</option>
+          </select>
+          <span class="field-error hidden text-xs" style="color:#D98066;">This field is required.</span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="time" class="text-[11px] tracking-[0.18em] uppercase text-ink-soft">Time</label>
+          <input id="time" name="time" type="time" class="field bg-transparent border-b border-line-strong text-[16px] py-3 px-1 transition-colors duration-400 outline-none hover:border-line-strong focus:border-gold" />
+          <span class="field-error hidden text-xs" style="color:#D98066;">This field is required.</span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="name" class="text-[11px] tracking-[0.18em] uppercase text-ink-soft">Name</label>
+          <input id="name" name="name" type="text" placeholder="Full name" class="field bg-transparent border-b border-line-strong text-[16px] py-3 px-1 transition-colors duration-400 outline-none hover:border-line-strong focus:border-gold" />
+          <span class="field-error hidden text-xs" style="color:#D98066;">This field is required.</span>
+        </div>
+        <div class="md:col-span-2 flex flex-col gap-2">
+          <label for="phone" class="text-[11px] tracking-[0.18em] uppercase text-ink-soft">Phone</label>
+          <input id="phone" name="phone" type="tel" placeholder="+61 4XX XXX XXX" class="field bg-transparent border-b border-line-strong text-[16px] py-3 px-1 transition-colors duration-400 outline-none hover:border-line-strong focus:border-gold" />
+          <span class="field-error hidden text-xs" style="color:#D98066;">This field is required.</span>
+        </div>
+
+        <div class="md:col-span-2 mt-2">
+          <button id="reserveSubmit" type="submit" class="relative w-full flex justify-center items-center bg-ink text-bg text-xs tracking-[0.18em] uppercase font-medium px-8 py-[18px] border border-ink transition-all duration-500 ease-premium hover:bg-gold hover:border-gold disabled:opacity-70 min-h-[52px]">
+            <span id="reserveSubmitLabel">Find a Table</span>
+            <span id="reserveSpinner" class="hidden w-4 h-4 rounded-full border-[1.5px] border-bg/30 border-t-bg animate-spin"></span>
+          </button>
+          <p id="reserveSuccess" class="hidden text-center text-sm text-gold mt-4">
+            Thank you — your request has been received. We&rsquo;ll confirm shortly.
+          </p>
+          <p id="reserveError" class="hidden text-center text-sm text-ink-soft mt-4">
+            Online booking isn&rsquo;t connected yet — please call us on (02) 5550 1234 and we&rsquo;ll happily seat you.
+          </p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================== LOCATION ============================== -->
+  <section id="location" class="py-24 md:py-32">
+    <div class="max-w-wrap mx-auto px-5 md:px-10 grid md:grid-cols-2 gap-16 md:gap-20 items-center">
+      <div>
+        <p class="font-sans text-[11px] tracking-[0.28em] uppercase text-gold font-medium">Find Us</p>
+        <h2 class="font-serif text-[32px] md:text-[50px] leading-[1.1] mt-4">123 Example Street<br />Sydney NSW</h2>
+        <div class="text-ink-soft leading-loose text-[15px] mt-9">
+          Monday — Sunday<br /><span class="text-ink">12:00 PM — 11:00 PM</span>
+        </div>
+        <div class="text-ink-soft leading-loose text-[15px] mt-6">
+          Phone <span class="text-ink">(02) 5550 1234</span><br />
+          Email <span class="text-ink">reservations@thegrillhouse.com.au</span>
+        </div>
+        <!-- Replace with a real Google Maps directions URL for the actual address -->
+        <a href="#" class="group inline-flex items-center gap-2.5 text-xs tracking-[0.18em] uppercase font-medium px-8 py-[18px] border transition-all duration-500 ease-premium whitespace-nowrap text-ink border-line-strong hover:border-gold hover:text-gold mt-9">
+          Get Directions
+          <span class="transition-transform duration-500 ease-premium group-hover:translate-x-1">→</span>
+        </a>
+      </div>
+      <!-- TODO: swap for an embedded map (Google Maps/Mapbox) once a provider is connected -->
+      <div class="relative h-[340px] md:h-[440px]">
+        <div class="ph-texture absolute inset-0"><span class="absolute bottom-3.5 left-4 text-[10px] tracking-[0.18em] uppercase text-ink/25">Exterior of The Grill House at dusk</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== FINAL CTA ============================== -->
+  <section class="py-40 md:py-56 text-center">
+    <div class="max-w-wrap mx-auto px-5 md:px-10">
+      <h2 class="font-serif uppercase text-[34px] sm:text-[52px] md:text-[84px] leading-[1.08]">
+        Come hungry.<br />Leave with a story.
+      </h2>
+      <a href="#reserve" class="group inline-flex items-center gap-2.5 text-xs tracking-[0.18em] uppercase font-medium px-8 py-[18px] border transition-all duration-500 ease-premium whitespace-nowrap bg-ink text-bg border-ink hover:bg-gold hover:border-gold mt-12">
+        Reserve a Table
       </a>
     </div>
-    <div class="ph ph-inner" data-tag="Map — connect provider" style="height:440px;"></div>
-  </div>
-</section>
-
-<!-- ============ FINAL CTA ============ -->
-<section style="padding:220px 0;text-align:center;">
-  <div class="wrap">
-    <h2 class="h-display" style="font-size:clamp(34px,6vw,84px);text-transform:uppercase;line-height:1.08;">Come hungry.<br>Leave with a story.</h2>
-    <a href="#reserve" class="btn btn-primary" style="margin-top:48px;">Reserve a Table</a>
-  </div>
-</section>
-
-<!-- ============ FOOTER ============ -->
-<footer style="border-top:1px solid var(--border);padding:70px 0 40px;">
-  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;">
-    <div>
-      <p class="h-display" style="font-size:20px;letter-spacing:.04em;">THE GRILL HOUSE</p>
-      <p style="color:var(--text-soft);font-size:13px;margin-top:14px;">Sydney, Australia</p>
-    </div>
-    <div style="display:flex;gap:60px;flex-wrap:wrap;">
-      <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;color:var(--text-soft);">
-        <a href="#menu" class="footer-link">Menu</a>
-        <a href="#reserve" class="footer-link">Reservations</a>
-        <a href="#story" class="footer-link">Our Story</a>
-        <a href="#gallery" class="footer-link">Gallery</a>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;color:var(--text-soft);">
-        <a href="#" class="footer-link">Instagram</a>
-        <a href="#" class="footer-link">Facebook</a>
-        <a href="#" class="footer-link">TikTok</a>
-      </div>
-    </div>
-  </div>
-  <div class="wrap" style="margin-top:50px;">
-    <p style="font-size:12px;color:var(--text-soft);opacity:.6;">© 2026 The Grill House</p>
-  </div>
-</footer>
+  </section>
 
 </main>
 
-<!-- ============ AI CONCIERGE WIDGET ============ -->
-<button id="aiFab" aria-label="Open AI Concierge" style="position:fixed;bottom:26px;right:26px;z-index:150;background:var(--text);color:var(--bg);padding:16px 22px;display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;">
-  <span id="aiFabDot" style="font-size:15px;color:var(--gold);">✦</span> AI Concierge
+<!-- ============================== FOOTER ============================== -->
+<footer class="border-t border-line py-16 md:py-[70px]">
+  <div class="max-w-wrap mx-auto px-5 md:px-10 flex justify-between flex-wrap gap-10">
+    <div>
+      <p class="font-serif text-xl tracking-[0.04em]">THE GRILL HOUSE</p>
+      <p class="text-ink-soft text-[13px] mt-3.5">Sydney, Australia</p>
+    </div>
+    <div class="flex gap-14 flex-wrap">
+      <div class="flex flex-col gap-3 text-[13px] text-ink-soft">
+        <a href="#menu" class="hover:text-gold transition-colors duration-400">Menu</a>
+        <a href="#reserve" class="hover:text-gold transition-colors duration-400">Reservations</a>
+        <a href="#story" class="hover:text-gold transition-colors duration-400">Our Story</a>
+        <a href="#gallery" class="hover:text-gold transition-colors duration-400">Gallery</a>
+      </div>
+      <div class="flex flex-col gap-3 text-[13px] text-ink-soft">
+        <a href="#" class="hover:text-gold transition-colors duration-400">Instagram</a>
+        <a href="#" class="hover:text-gold transition-colors duration-400">Facebook</a>
+        <a href="#" class="hover:text-gold transition-colors duration-400">TikTok</a>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-wrap mx-auto px-5 md:px-10 mt-12">
+    <p class="text-xs text-ink-soft/60">© 2026 The Grill House</p>
+  </div>
+</footer>
+
+<!-- ============================== CONCIERGE WIDGET ============================== -->
+<button id="conciergeBtn" aria-label="Open the Concierge" class="fixed bottom-6 right-6 z-40 bg-ink text-bg px-5 py-4 flex items-center gap-2.5 text-xs tracking-[0.14em] uppercase font-medium min-h-[44px]">
+  <span class="text-gold text-base">✦</span> Concierge
 </button>
 
-<div id="aiPanel" role="dialog" aria-label="AI Concierge chat" aria-hidden="true">
-  <div id="aiPanelHeader">
+<div id="conciergeOverlay" class="fixed inset-0 z-40 bg-black/40 transition-opacity duration-500 ease-premium md:hidden opacity-0 pointer-events-none"></div>
+
+<div id="conciergePanel" role="dialog" aria-label="Concierge chat" aria-hidden="true"
+  class="fixed z-50 bg-surface border border-line-strong flex flex-col shadow-2xl transition-all duration-[450ms] ease-premium
+  bottom-0 right-0 left-0 max-h-[88vh] md:left-auto md:bottom-[100px] md:right-6 md:w-[380px] md:max-h-[min(600px,72vh)]
+  translate-y-6 scale-[0.97] opacity-0 pointer-events-none">
+  <div class="flex justify-between items-center px-5 py-5 border-b border-line">
     <div>
-      <p class="h-display" style="font-size:16px;letter-spacing:.03em;">THE GRILL HOUSE</p>
-      <p class="label" style="margin-top:2px;">AI Concierge</p>
+      <p class="font-serif text-base tracking-[0.03em]">THE GRILL HOUSE</p>
+      <p class="text-[11px] tracking-[0.28em] uppercase text-gold font-medium mt-0.5">Concierge</p>
     </div>
-    <button id="aiClose" aria-label="Close chat" style="font-size:20px;color:var(--text-soft);">&times;</button>
+    <button id="conciergeClose" aria-label="Close chat" class="text-ink-soft min-h-[44px] min-w-[44px] flex items-center justify-center">✕</button>
   </div>
 
-  <div id="aiBody">
-    <div class="ai-msg ai-msg-bot">Hi. How can I help you?</div>
-    <div id="aiQuick">
-      <button class="ai-quick-btn">Book a table</button>
-      <button class="ai-quick-btn">Menu questions</button>
-      <button class="ai-quick-btn">Opening hours</button>
-      <button class="ai-quick-btn">Location</button>
-      <button class="ai-quick-btn">Something else</button>
+  <div id="conciergeBody" class="p-5 overflow-y-auto flex-1 flex flex-col gap-3.5">
+    <div class="max-w-[85%] p-3.5 text-sm leading-relaxed bg-ink/[0.06] border border-line self-start">
+      Hi. How can I help you?
+    </div>
+    <div class="flex flex-wrap gap-2 mt-1">
+      <button class="quick-action border border-line-strong px-3.5 py-2.5 text-xs min-h-[44px] hover:border-gold hover:text-gold transition-colors duration-300">Book a table</button>
+      <button class="quick-action border border-line-strong px-3.5 py-2.5 text-xs min-h-[44px] hover:border-gold hover:text-gold transition-colors duration-300">Menu questions</button>
+      <button class="quick-action border border-line-strong px-3.5 py-2.5 text-xs min-h-[44px] hover:border-gold hover:text-gold transition-colors duration-300">Opening hours</button>
+      <button class="quick-action border border-line-strong px-3.5 py-2.5 text-xs min-h-[44px] hover:border-gold hover:text-gold transition-colors duration-300">Location</button>
+      <button class="quick-action border border-line-strong px-3.5 py-2.5 text-xs min-h-[44px] hover:border-gold hover:text-gold transition-colors duration-300">Something else</button>
     </div>
   </div>
 
-  <form id="aiInputRow">
-    <input id="aiInput" type="text" placeholder="Type your question..." autocomplete="off" />
-    <button type="submit" aria-label="Send">
-      <svg width="16" height="12" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="currentColor" stroke-width="1.2"/></svg>
-    </button>
+  <form id="conciergeForm" class="flex items-center gap-3 border-t border-line px-4 py-3.5">
+    <input id="conciergeInput" type="text" placeholder="Type your question..." autocomplete="off" class="flex-1 bg-transparent text-sm outline-none placeholder:text-ink-soft" />
+    <button type="submit" aria-label="Send" class="text-gold min-h-[44px] min-w-[44px] flex items-center justify-center">➤</button>
   </form>
 </div>
-<div id="aiOverlay"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
-gsap.registerPlugin(ScrollTrigger);
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  gsap.registerPlugin(ScrollTrigger);
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ---------- Loader + Hero entrance ---------- */
-window.addEventListener('load', () => {
-  const tl = gsap.timeline({defaults:{ease:'power3.out'}});
-  tl.to('#loader',{opacity:0,duration:.7,onComplete:()=>document.getElementById('loader').style.display='none'})
-    .to('#heroImg',{scale:1,duration:1.6,ease:'power2.out'},0.1)
-    .to('#heroTitle',{y:'0%',duration:1.1},0.35)
-    .to('#heroSub',{y:'0%',duration:.9},0.6)
-    .to('#heroCopy',{opacity:1,duration:.8},0.85)
-    .to('#heroCtas',{opacity:1,duration:.8},1.05)
-    .to('#heroMeta',{opacity:1,duration:.8},1.25);
-});
-
-/* ---------- Nav scroll state ---------- */
-const nav = document.getElementById('mainNav');
-ScrollTrigger.create({
-  start:'top -80',
-  onUpdate:(self)=>{ nav.classList.toggle('nav-scrolled', self.scroll() > 80); }
-});
-
-/* ---------- Mobile menu ---------- */
-const mobileBtn = document.getElementById('mobileBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-const mbLines = document.querySelectorAll('.mb-line');
-mobileBtn.addEventListener('click', ()=>{
-  const isOpen = mobileMenu.classList.toggle('open');
-  mobileBtn.setAttribute('aria-expanded', isOpen);
-  mbLines[0].classList.toggle('open1', isOpen);
-  mbLines[1].classList.toggle('open2', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-document.querySelectorAll('.mm-link').forEach(l=>l.addEventListener('click',()=>{
-  mobileMenu.classList.remove('open'); document.body.style.overflow='';
-  mbLines[0].classList.remove('open1'); mbLines[1].classList.remove('open2');
-}));
-
-/* ---------- Scroll reveals ---------- */
-function revealUp(selector, opts={}){
-  document.querySelectorAll(selector).forEach(el=>{
-    gsap.from(el, {
-      y: 32, opacity:0, duration: 1, ease:'power3.out',
-      scrollTrigger:{trigger:el, start:'top 85%'},
-      ...opts
-    });
-  });
-}
-if(!reduceMotion){
-  revealUp('#experience .reveal-col > *');
-  revealUp('#story > .wrap > div:last-child > *');
-  revealUp('#signature .wrap > div');
-  revealUp('#menu h2, #menu .label, #menu .menu-row');
-  revealUp('#concierge .wrap > div:first-child > *');
-  revealUp('#gallery .label, #gallery h2');
-  revealUp('#reserve .label, #reserve h2, #reserveForm');
-  revealUp('#location .wrap > div:first-child > *');
-
-  document.querySelectorAll('.img-scale').forEach(el=>{
-    gsap.to(el.querySelector('.ph'), {
-      scale:1, duration:1.3, ease:'power2.out',
-      scrollTrigger:{trigger:el, start:'top 85%'}
-    });
-  });
-
-  gsap.utils.toArray('.gimg').forEach((el,i)=>{
-    gsap.from(el, {opacity:0, y:24, duration:.9, ease:'power3.out',
-      scrollTrigger:{trigger:el, start:'top 90%'}, delay:i*0.04});
-  });
-
-  gsap.utils.toArray('.dish-card').forEach((el)=>{
-    gsap.from(el, {opacity:0, y:30, duration:.8, ease:'power3.out',
-      scrollTrigger:{trigger:el, start:'top 90%'}});
-  });
-}
-
-/* ---------- Fire words sequence (pinned) ---------- */
-if(!reduceMotion && window.innerWidth > 700){
-  ScrollTrigger.create({
-    trigger:'#fireStory', start:'top top', end:'+=120%', pin:true, scrub:.6,
-    onUpdate:(self)=>{
-      const words = document.querySelectorAll('.fire-word');
-      const step = 1/words.length;
-      words.forEach((w,i)=>{ w.classList.toggle('active', self.progress >= step*i); });
+  /* ---------- NAV ---------- */
+  var nav = document.getElementById('siteNav');
+  function onScroll() {
+    if (window.scrollY > 80) {
+      nav.classList.remove('py-7', 'bg-transparent');
+      nav.classList.add('bg-bg/72', 'backdrop-blur-md', 'border-b', 'border-line', 'py-4');
+    } else {
+      nav.classList.add('py-7', 'bg-transparent');
+      nav.classList.remove('bg-bg/72', 'backdrop-blur-md', 'border-b', 'border-line', 'py-4');
     }
-  });
-} else {
-  document.querySelectorAll('.fire-word').forEach(w=>w.classList.add('active'));
-}
-
-/* ---------- Reservation form ---------- */
-const form = document.getElementById('reserveForm');
-const submitBtn = document.getElementById('reserveSubmit');
-const successMsg = document.getElementById('reserveSuccess');
-form.addEventListener('submit', (e)=>{
-  e.preventDefault();
-  let valid = true;
-  form.querySelectorAll('.field').forEach(f=>{
-    const input = f.querySelector('input,select');
-    const ok = input.value.trim().length > 0;
-    f.classList.toggle('error', !ok);
-    if(!ok) valid = false;
-  });
-  if(!valid) return;
-
-  // NOTE: no reservation backend is connected yet — this simulates a
-  // request lifecycle only. Replace with a real API call, e.g.:
-  // await fetch('/api/reservations', { method:'POST', body: new FormData(form) })
-  submitBtn.classList.add('loading');
-  submitBtn.querySelector('.btn-label').textContent = '';
-  if(!submitBtn.querySelector('.spinner')){
-    submitBtn.insertAdjacentHTML('beforeend','<span class="spinner"></span>');
   }
-  setTimeout(()=>{
-    submitBtn.classList.remove('loading');
-    submitBtn.querySelector('.btn-label').textContent = 'Find a Table';
-    successMsg.style.display = 'block';
-    form.reset();
-  }, 1200);
-});
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-/* ---------- AI Concierge widget ---------- */
-const aiFab = document.getElementById('aiFab');
-const aiPanel = document.getElementById('aiPanel');
-const aiOverlay = document.getElementById('aiOverlay');
-const aiClose = document.getElementById('aiClose');
-const aiBody = document.getElementById('aiBody');
-const aiInputRow = document.getElementById('aiInputRow');
-const aiInput = document.getElementById('aiInput');
-
-function openAI(){
-  aiPanel.classList.add('open'); aiPanel.setAttribute('aria-hidden','false');
-  if(window.innerWidth <= 860) aiOverlay.classList.add('open');
-  setTimeout(()=>aiInput.focus(), 300);
-}
-function closeAI(){
-  aiPanel.classList.remove('open'); aiPanel.setAttribute('aria-hidden','true');
-  aiOverlay.classList.remove('open');
-}
-aiFab.addEventListener('click', openAI);
-document.getElementById('openConciergeBtn').addEventListener('click', openAI);
-aiClose.addEventListener('click', closeAI);
-aiOverlay.addEventListener('click', closeAI);
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeAI(); });
-
-function addMsg(text, who){
-  const div = document.createElement('div');
-  div.className = 'ai-msg ai-msg-' + who;
-  div.textContent = text;
-  aiBody.appendChild(div);
-  aiBody.scrollTop = aiBody.scrollHeight;
-}
-
-// NOTE: replies below are placeholder responses for preview purposes only.
-// Wire this up to the existing AI receptionist endpoint, e.g.:
-// const res = await fetch('/api/concierge', {method:'POST', body: JSON.stringify({message})});
-function fakeReply(userText){
-  const t = userText.toLowerCase();
-  let reply = "Thanks for your message — one of our team will follow up shortly.";
-  if(t.includes('book') || t.includes('table') || t.includes('reserv')) reply = "I'd be glad to help you book a table. What date, time and party size would you like?";
-  else if(t.includes('menu') || t.includes('vegetarian') || t.includes('vegan')) reply = "We offer a range of dishes including vegetarian options like our charred seasonal vegetables and burrata. Would you like to see the full menu?";
-  else if(t.includes('hour') || t.includes('open')) reply = "We're open daily from 12PM to 11PM.";
-  else if(t.includes('locat') || t.includes('address') || t.includes('where')) reply = "You'll find us at 123 Example Street, Sydney NSW.";
-  setTimeout(()=>addMsg(reply,'bot'), 650);
-}
-
-document.querySelectorAll('.ai-quick-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    addMsg(btn.textContent, 'user');
-    fakeReply(btn.textContent);
-  });
-});
-aiInputRow.addEventListener('submit', (e)=>{
-  e.preventDefault();
-  const val = aiInput.value.trim();
-  if(!val) return;
-  addMsg(val, 'user');
-  aiInput.value = '';
-  fakeReply(val);
-});
-
-/* smooth-close mobile menu on resize up */
-window.addEventListener('resize', ()=>{
-  if(window.innerWidth > 860){
-    mobileMenu.classList.remove('open'); document.body.style.overflow='';
+  var mobileToggle = document.getElementById('mobileToggle');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var bar1 = document.getElementById('bar1');
+  var bar2 = document.getElementById('bar2');
+  var mobileOpen = false;
+  function setMobileOpen(v) {
+    mobileOpen = v;
+    mobileToggle.setAttribute('aria-expanded', v);
+    document.body.style.overflow = v ? 'hidden' : '';
+    if (v) {
+      mobileMenu.classList.remove('-translate-y-full');
+      mobileMenu.classList.add('translate-y-0');
+      bar1.style.transform = 'translateY(3px) rotate(45deg)';
+      bar2.style.transform = 'translateY(-3px) rotate(-45deg)';
+    } else {
+      mobileMenu.classList.add('-translate-y-full');
+      mobileMenu.classList.remove('translate-y-0');
+      bar1.style.transform = '';
+      bar2.style.transform = '';
+    }
   }
-});
+  mobileToggle.addEventListener('click', function () { setMobileOpen(!mobileOpen); });
+  document.querySelectorAll('.mobile-link').forEach(function (a) {
+    a.addEventListener('click', function () { setMobileOpen(false); });
+  });
+
+  /* ---------- HERO INTRO ---------- */
+  if (!reduceMotion) {
+    var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.fromTo('#heroImg', { scale: 1.12 }, { scale: 1, duration: 1.6, ease: 'power2.out' }, 0.1)
+      .fromTo('#heroLabel', { yPercent: 120 }, { yPercent: 0, duration: 0.8 }, 0.3)
+      .fromTo('#heroTitle', { yPercent: 110 }, { yPercent: 0, duration: 1.1 }, 0.5)
+      .fromTo('#heroCopy', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 0.95)
+      .fromTo('#heroCtas', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 1.15)
+      .fromTo('#heroMeta', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 1.35);
+  }
+
+  /* ---------- SCROLL REVEALS ---------- */
+  if (!reduceMotion) {
+    gsap.fromTo('#experienceImg', { scale: 1.08 }, {
+      scale: 1, duration: 1.3, ease: 'power2.out',
+      scrollTrigger: { trigger: '#experienceImg', start: 'top 85%' },
+    });
+    gsap.from('#experienceCol .reveal-item', {
+      y: 32, opacity: 0, duration: 1, stagger: 0.08, ease: 'power3.out',
+      scrollTrigger: { trigger: '#experienceCol', start: 'top 85%' },
+    });
+
+    gsap.fromTo('#storyImg', { scale: 1.08 }, {
+      scale: 1, duration: 1.3, ease: 'power2.out',
+      scrollTrigger: { trigger: '#storyImg', start: 'top 85%' },
+    });
+    gsap.from('#storyCol .reveal-item', {
+      y: 28, opacity: 0, duration: 0.9, stagger: 0.08, ease: 'power3.out',
+      scrollTrigger: { trigger: '#storyCol', start: 'top 85%' },
+    });
+
+    gsap.utils.toArray('.dish-card').forEach(function (el) {
+      gsap.from(el, {
+        opacity: 0, y: 30, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 90%' },
+      });
+    });
+
+    gsap.utils.toArray('.g-item').forEach(function (el, i) {
+      gsap.from(el, {
+        opacity: 0, y: 24, duration: 0.9, delay: i * 0.04, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 90%' },
+      });
+    });
+  }
+
+  /* ---------- FIRE STORY PINNED WORD SEQUENCE ---------- */
+  var fireWords = document.querySelectorAll('.fire-word');
+  if (reduceMotion || window.innerWidth <= 700) {
+    fireWords.forEach(function (w) { w.style.opacity = '1'; });
+  } else {
+    ScrollTrigger.create({
+      trigger: '#fireStory',
+      start: 'top top',
+      end: '+=120%',
+      pin: true,
+      scrub: 0.6,
+      onUpdate: function (self) {
+        var step = 1 / fireWords.length;
+        fireWords.forEach(function (w, i) {
+          w.style.opacity = self.progress >= step * i ? '1' : '0.25';
+        });
+      },
+    });
+  }
+
+  /* ---------- CONCIERGE WIDGET ---------- */
+  var conciergeBtn = document.getElementById('conciergeBtn');
+  var conciergeOverlay = document.getElementById('conciergeOverlay');
+  var conciergePanel = document.getElementById('conciergePanel');
+  var conciergeClose = document.getElementById('conciergeClose');
+  var conciergeBody = document.getElementById('conciergeBody');
+  var conciergeInput = document.getElementById('conciergeInput');
+  var conciergeForm = document.getElementById('conciergeForm');
+  var openConciergeFromSection = document.getElementById('openConciergeFromSection');
+  var conciergeIsOpen = false;
+
+  function openConcierge() {
+    conciergeIsOpen = true;
+    conciergePanel.setAttribute('aria-hidden', 'false');
+    conciergePanel.classList.remove('translate-y-6', 'scale-[0.97]', 'opacity-0', 'pointer-events-none');
+    conciergePanel.classList.add('translate-y-0', 'scale-100', 'opacity-100', 'pointer-events-auto');
+    conciergeOverlay.classList.remove('opacity-0', 'pointer-events-none');
+    conciergeOverlay.classList.add('opacity-100', 'pointer-events-auto');
+    setTimeout(function () { conciergeInput.focus(); }, 300);
+  }
+  function closeConcierge() {
+    conciergeIsOpen = false;
+    conciergePanel.setAttribute('aria-hidden', 'true');
+    conciergePanel.classList.add('translate-y-6', 'scale-[0.97]', 'opacity-0', 'pointer-events-none');
+    conciergePanel.classList.remove('translate-y-0', 'scale-100', 'opacity-100', 'pointer-events-auto');
+    conciergeOverlay.classList.add('opacity-0', 'pointer-events-none');
+    conciergeOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+  }
+  conciergeBtn.addEventListener('click', openConcierge);
+  openConciergeFromSection.addEventListener('click', openConcierge);
+  conciergeClose.addEventListener('click', closeConcierge);
+  conciergeOverlay.addEventListener('click', closeConcierge);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && conciergeIsOpen) closeConcierge();
+  });
+
+  /**
+   * REPLACE fakeReply() WITH YOUR REAL AI RECEPTIONIST.
+   * Simplest integration is a POST to your existing receptionist endpoint, e.g.:
+   *
+   *   async function getReply(message) {
+   *     const res = await fetch('/api/concierge', {
+   *       method: 'POST',
+   *       headers: { 'Content-Type': 'application/json' },
+   *       body: JSON.stringify({ message }),
+   *     });
+   *     const data = await res.json();
+   *     return data.reply;
+   *   }
+   *
+   * and call it inside sendMessage() below instead of fakeReply(text).
+   */
+  function fakeReply(userText) {
+    var t = userText.toLowerCase();
+    if (t.indexOf('book') > -1 || t.indexOf('table') > -1 || t.indexOf('reserv') > -1)
+      return "I'd be glad to help you book a table. What date, time and party size would you like?";
+    if (t.indexOf('menu') > -1 || t.indexOf('vegetarian') > -1 || t.indexOf('vegan') > -1)
+      return 'We offer a range of dishes including vegetarian options like our charred seasonal vegetables and burrata. Would you like to see the full menu?';
+    if (t.indexOf('hour') > -1 || t.indexOf('open') > -1) return "We're open daily from 12PM to 11PM.";
+    if (t.indexOf('locat') > -1 || t.indexOf('address') > -1 || t.indexOf('where') > -1)
+      return "You'll find us at 123 Example Street, Sydney NSW.";
+    return 'Thanks for your message — one of our team will follow up shortly.';
+  }
+
+  function appendMessage(role, text) {
+    var div = document.createElement('div');
+    div.className = 'max-w-[85%] p-3.5 text-sm leading-relaxed ' +
+      (role === 'bot' ? 'bg-ink/[0.06] border border-line self-start' : 'bg-ink text-bg self-end');
+    div.textContent = text;
+    conciergeBody.appendChild(div);
+    conciergeBody.scrollTo({ top: conciergeBody.scrollHeight });
+  }
+
+  function sendMessage(text) {
+    if (!text || !text.trim()) return;
+    appendMessage('user', text);
+    setTimeout(function () { appendMessage('bot', fakeReply(text)); }, 650);
+  }
+
+  document.querySelectorAll('.quick-action').forEach(function (btn) {
+    btn.addEventListener('click', function () { sendMessage(btn.textContent); });
+  });
+  conciergeForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    sendMessage(conciergeInput.value);
+    conciergeInput.value = '';
+  });
+
+  /* ---------- RESERVATION FORM ---------- */
+  /**
+   * REPLACE THIS with a real call to your reservation API, e.g.:
+   *
+   *   async function submitReservation(payload) {
+   *     const res = await fetch('/api/reservations', {
+   *       method: 'POST',
+   *       headers: { 'Content-Type': 'application/json' },
+   *       body: JSON.stringify(payload),
+   *     });
+   *     if (!res.ok) throw new Error('Request failed');
+   *     return res.json();
+   *   }
+   *
+   * Until that's connected, this intentionally does NOT fake a successful
+   * booking — it surfaces an honest message instead. All visual states
+   * (loading/error/success) are already wired up and will activate
+   * correctly the moment a real endpoint is added above.
+   */
+  function submitReservation(payload) {
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () { reject(new Error('NOT_CONNECTED')); }, 900);
+    });
+  }
+
+  var reservationForm = document.getElementById('reservationForm');
+  var reserveSubmit = document.getElementById('reserveSubmit');
+  var reserveSubmitLabel = document.getElementById('reserveSubmitLabel');
+  var reserveSpinner = document.getElementById('reserveSpinner');
+  var reserveSuccess = document.getElementById('reserveSuccess');
+  var reserveError = document.getElementById('reserveError');
+
+  reservationForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    reserveSuccess.classList.add('hidden');
+    reserveError.classList.add('hidden');
+
+    var fields = reservationForm.querySelectorAll('.field');
+    var hasError = false;
+    fields.forEach(function (f) {
+      var errorEl = f.parentElement.querySelector('.field-error');
+      if (!f.value || !f.value.toString().trim()) {
+        hasError = true;
+        f.classList.remove('border-line-strong');
+        f.style.borderColor = '#D98066';
+        errorEl.classList.remove('hidden');
+      } else {
+        f.style.borderColor = '';
+        f.classList.add('border-line-strong');
+        errorEl.classList.add('hidden');
+      }
+    });
+    if (hasError) return;
+
+    reserveSubmit.disabled = true;
+    reserveSubmitLabel.classList.add('hidden');
+    reserveSpinner.classList.remove('hidden');
+
+    var payload = {};
+    fields.forEach(function (f) { payload[f.name] = f.value; });
+
+    submitReservation(payload).then(function () {
+      reserveSuccess.classList.remove('hidden');
+      reservationForm.reset();
+    }).catch(function () {
+      reserveError.classList.remove('hidden');
+    }).finally(function () {
+      reserveSubmit.disabled = false;
+      reserveSubmitLabel.classList.remove('hidden');
+      reserveSpinner.classList.add('hidden');
+    });
+  });
 </script>
+
 </body>
 </html>
