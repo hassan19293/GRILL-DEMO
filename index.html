@@ -16,13 +16,13 @@
     theme: {
       extend: {
         colors: {
-          bg: '#0B0B0A',
-          surface: '#141311',
-          ink: '#F4F0E8',
-          'ink-soft': '#A8A39A',
-          gold: '#C9A66B',
-          line: 'rgba(244,240,232,0.12)',
-          'line-strong': 'rgba(244,240,232,0.2)',
+          bg: '#F7F3EC',
+          surface: '#EFE6D4',
+          ink: '#2A2018',
+          'ink-soft': '#8C7F6E',
+          gold: '#B27A3E',
+          line: 'rgba(42,32,24,0.12)',
+          'line-strong': 'rgba(42,32,24,0.22)',
         },
         fontFamily: {
           serif: ['"Cormorant Garamond"', 'serif'],
@@ -45,9 +45,9 @@
 
 <style>
   html { scroll-behavior: smooth; }
-  body { background: #0B0B0A; color: #F4F0E8; }
-  ::selection { background: #C9A66B; color: #0B0B0A; }
-  :focus-visible { outline: 1px solid #C9A66B; outline-offset: 3px; }
+  body { background: #F7F3EC; color: #2A2018; }
+  ::selection { background: #B27A3E; color: #F7F3EC; }
+  :focus-visible { outline: 1px solid #B27A3E; outline-offset: 3px; }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -75,7 +75,7 @@
     top: 0; left: 0;
     width: 8px; height: 8px;
     border-radius: 50%;
-    background: #C9A66B;
+    background: #B27A3E;
     pointer-events: none;
     z-index: 9998;
     transform: translate(-50%, -50%);
@@ -86,15 +86,15 @@
     top: 0; left: 0;
     width: 40px; height: 40px;
     border-radius: 50%;
-    border: 1px solid rgba(201,166,107,0.6);
+    border: 1px solid rgba(178,122,62,0.65);
     pointer-events: none;
     z-index: 9998;
     transform: translate(-50%, -50%);
     transition: width 0.35s cubic-bezier(.22,1,.36,1), height 0.35s cubic-bezier(.22,1,.36,1),
                 border-color 0.35s ease, background-color 0.35s ease, opacity 0.3s ease;
   }
-  .cursor-ring.is-view { width: 74px; height: 74px; background: rgba(201,166,107,0.1); }
-  .cursor-ring.is-drag { width: 90px; height: 90px; background: rgba(201,166,107,0.12); }
+  .cursor-ring.is-view { width: 74px; height: 74px; background: rgba(178,122,62,0.14); }
+  .cursor-ring.is-drag { width: 90px; height: 90px; background: rgba(178,122,62,0.16); }
   .cursor-label {
     position: fixed;
     top: 0; left: 0;
@@ -104,8 +104,8 @@
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #0B0B0A;
-    background: #C9A66B;
+    color: #F7F3EC;
+    background: #2A2018;
     padding: 2px 8px;
     opacity: 0;
     transition: opacity 0.25s ease;
@@ -132,7 +132,7 @@
 
   .menu-dots {
     flex: 1;
-    border-bottom: 1px dotted rgba(244, 240, 232, 0.2);
+    border-bottom: 1px dotted rgba(42, 32, 24, 0.28);
     position: relative;
     top: -4px;
   }
@@ -165,7 +165,7 @@
 <div id="cursorLabel" class="cursor-label hidden md:block"></div>
 
 <!-- ============================== NAV ============================== -->
-<nav id="siteNav" class="fixed top-0 inset-x-0 z-50 transition-all duration-500 ease-premium py-7 bg-transparent">
+<nav id="siteNav" class="fixed top-0 inset-x-0 z-50 transition-all duration-500 ease-premium py-7 bg-transparent text-bg">
   <div class="max-w-wrap mx-auto px-5 md:px-10 flex items-center justify-between">
     <a href="#top" class="font-serif text-[19px] tracking-[0.06em]">THE GRILL HOUSE</a>
 
@@ -186,14 +186,14 @@
         Gallery
         <span class="absolute left-0 right-0 -bottom-1.5 h-px bg-gold scale-x-0 origin-right transition-transform duration-500 ease-premium group-hover:scale-x-100 group-hover:origin-left"></span>
       </a>
-      <a href="#reserve" class="group inline-flex items-center gap-2.5 text-xs tracking-[0.18em] uppercase font-medium px-6 py-3 border transition-all duration-500 ease-premium whitespace-nowrap text-ink border-line-strong hover:border-gold hover:text-gold">
+      <a href="#reserve" class="group inline-flex items-center gap-2.5 text-xs tracking-[0.18em] uppercase font-medium px-6 py-3 border transition-all duration-500 ease-premium whitespace-nowrap border-current hover:border-gold hover:text-gold">
         Reserve a Table
       </a>
     </div>
 
     <button id="mobileToggle" aria-label="Open menu" aria-expanded="false" class="md:hidden flex flex-col gap-1.5 w-6 min-h-[44px] min-w-[44px] items-center justify-center">
-      <span id="bar1" class="h-px w-6 bg-ink transition-all duration-400 ease-premium"></span>
-      <span id="bar2" class="h-px w-6 bg-ink transition-all duration-400 ease-premium"></span>
+      <span id="bar1" class="h-px w-6 bg-current transition-all duration-400 ease-premium"></span>
+      <span id="bar2" class="h-px w-6 bg-current transition-all duration-400 ease-premium"></span>
     </button>
   </div>
 </nav>
@@ -218,7 +218,7 @@
     <div id="heroImg" class="absolute inset-0 js-hero-el">
       <img src="https://images.pexels.com/photos/18263255/pexels-photo-18263255.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Flames rising during a live fire cooking presentation" loading="eager" class="absolute inset-0 w-full h-full object-cover" />
     </div>
-    <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/35 to-bg/55"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-ink/60"></div>
 
     <div class="relative z-10 max-w-wrap mx-auto w-full px-5 md:px-10 pb-16">
       <div class="overflow-hidden md:ml-[8.33%]">
@@ -227,11 +227,11 @@
         </p>
       </div>
       <div class="overflow-hidden mt-2 md:ml-[8.33%]">
-        <h1 id="heroTitle" class="js-hero-el font-serif uppercase leading-[0.95] tracking-tight text-[52px] sm:text-[80px] md:text-[110px] lg:text-[136px]">
+        <h1 id="heroTitle" class="js-hero-el font-serif uppercase leading-[0.95] tracking-tight text-[52px] sm:text-[80px] md:text-[110px] lg:text-[136px] text-bg">
           The Art<br />of Fire.
         </h1>
       </div>
-      <p id="heroCopy" class="js-hero-el font-sans font-light text-ink-soft leading-relaxed max-w-[420px] mt-6 text-[17px] md:ml-[8.33%]">
+      <p id="heroCopy" class="js-hero-el font-sans font-light text-bg/70 leading-relaxed max-w-[420px] mt-6 text-[17px] md:ml-[8.33%]">
         A modern steakhouse built around flame, craft and the finest cuts.
       </p>
 
@@ -240,16 +240,16 @@
           Reserve a Table
           <span class="transition-transform duration-500 ease-premium group-hover:translate-x-1">→</span>
         </a>
-        <a href="#experience" class="group inline-flex items-center gap-2.5 text-xs tracking-[0.18em] uppercase font-medium px-8 py-[18px] border transition-all duration-500 ease-premium whitespace-nowrap text-ink border-line-strong hover:border-gold hover:text-gold">
+        <a href="#experience" class="group inline-flex items-center gap-2.5 text-xs tracking-[0.18em] uppercase font-medium px-8 py-[18px] border transition-all duration-500 ease-premium whitespace-nowrap text-bg border-bg/30 hover:border-gold hover:text-gold">
           Discover the Experience
         </a>
       </div>
 
       <div id="heroMeta" class="js-hero-el flex justify-between items-end flex-wrap gap-5 mt-16 md:ml-[8.33%]">
-        <div class="text-xs tracking-[0.15em] uppercase text-ink-soft">
-          Open Daily<br /><span class="text-ink">12PM — 11PM</span>
+        <div class="text-xs tracking-[0.15em] uppercase text-bg/60">
+          Open Daily<br /><span class="text-bg">12PM — 11PM</span>
         </div>
-        <a href="#experience" class="text-[11px] tracking-[0.18em] uppercase text-ink-soft flex items-center gap-2.5">
+        <a href="#experience" class="text-[11px] tracking-[0.18em] uppercase text-bg/60 flex items-center gap-2.5">
           Scroll to Explore
           <span class="animate-bounce inline-block">↓</span>
         </a>
@@ -329,7 +329,7 @@
           <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.06]">
             <img src="https://images.pexels.com/photos/6542787/pexels-photo-6542787.jpeg?auto=compress&cs=tinysrgb&w=900" alt="The Signature Ribeye, plated with smoked sea salt" loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
           </div>
-          <span class="absolute top-5 right-5 w-9 h-9 rounded-full border border-ink/30 bg-bg/40 backdrop-blur-sm flex items-center justify-center opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">→</span>
+          <span class="absolute top-5 right-5 w-9 h-9 rounded-full border border-bg/40 bg-ink/40 text-bg backdrop-blur-sm flex items-center justify-center opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">→</span>
         </div>
         <div class="pt-5 pb-2.5 px-1 transition-transform duration-500 ease-premium group-hover:translate-x-1">
           <span class="text-[11px] tracking-[0.28em] uppercase text-gold font-medium opacity-50 transition-opacity duration-500 group-hover:opacity-100">01</span>
@@ -345,7 +345,7 @@
           <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.06]">
             <img src="https://images.pexels.com/photos/299348/pexels-photo-299348.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Black Garlic Tenderloin plated with glaze" loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
           </div>
-          <span class="absolute top-5 right-5 w-9 h-9 rounded-full border border-ink/30 bg-bg/40 backdrop-blur-sm flex items-center justify-center opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">→</span>
+          <span class="absolute top-5 right-5 w-9 h-9 rounded-full border border-bg/40 bg-ink/40 text-bg backdrop-blur-sm flex items-center justify-center opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">→</span>
         </div>
         <div class="pt-5 pb-2.5 px-1 transition-transform duration-500 ease-premium group-hover:translate-x-1">
           <span class="text-[11px] tracking-[0.28em] uppercase text-gold font-medium opacity-50 transition-opacity duration-500 group-hover:opacity-100">02</span>
@@ -361,7 +361,7 @@
           <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.06]">
             <img src="https://images.pexels.com/photos/11795607/pexels-photo-11795607.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Fire-grilled lamb chops with herb crust" loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
           </div>
-          <span class="absolute top-5 right-5 w-9 h-9 rounded-full border border-ink/30 bg-bg/40 backdrop-blur-sm flex items-center justify-center opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">→</span>
+          <span class="absolute top-5 right-5 w-9 h-9 rounded-full border border-bg/40 bg-ink/40 text-bg backdrop-blur-sm flex items-center justify-center opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">→</span>
         </div>
         <div class="pt-5 pb-2.5 px-1 transition-transform duration-500 ease-premium group-hover:translate-x-1">
           <span class="text-[11px] tracking-[0.28em] uppercase text-gold font-medium opacity-50 transition-opacity duration-500 group-hover:opacity-100">03</span>
@@ -377,7 +377,7 @@
           <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.06]">
             <img src="https://images.pexels.com/photos/8477347/pexels-photo-8477347.jpeg?auto=compress&cs=tinysrgb&w=900" alt="The Tomahawk carved tableside, dry-aged and dramatic" loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
           </div>
-          <span class="absolute top-5 right-5 w-9 h-9 rounded-full border border-ink/30 bg-bg/40 backdrop-blur-sm flex items-center justify-center opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">→</span>
+          <span class="absolute top-5 right-5 w-9 h-9 rounded-full border border-bg/40 bg-ink/40 text-bg backdrop-blur-sm flex items-center justify-center opacity-0 -translate-x-2 translate-y-2 transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">→</span>
         </div>
         <div class="pt-5 pb-2.5 px-1 transition-transform duration-500 ease-premium group-hover:translate-x-1">
           <span class="text-[11px] tracking-[0.28em] uppercase text-gold font-medium opacity-50 transition-opacity duration-500 group-hover:opacity-100">04</span>
@@ -395,9 +395,9 @@
     <div class="absolute inset-0">
       <img src="https://images.pexels.com/photos/14887417/pexels-photo-14887417.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Close-up of red-hot hardwood coals and flame" loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
     </div>
-    <div class="absolute inset-0 bg-bg/55"></div>
+    <div class="absolute inset-0 bg-ink/60"></div>
     <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-      <h2 class="font-serif uppercase text-[32px] sm:text-[48px] md:text-[80px] leading-[1.05]">
+      <h2 class="font-serif uppercase text-[32px] sm:text-[48px] md:text-[80px] leading-[1.05] text-bg">
         Cooked with fire.<br />Not shortcuts.
       </h2>
       <div class="flex gap-6 md:gap-9 mt-12 md:mt-14 flex-wrap justify-center">
@@ -545,36 +545,36 @@
           <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.045]">
             <img src="https://images.pexels.com/photos/4508641/pexels-photo-4508641.jpeg?auto=compress&cs=tinysrgb&w=900" alt="The main dining room in dark, moody tones" loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
           </div>
-          <div class="absolute inset-0 bg-bg/28 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
-          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
+          <div class="absolute inset-0 bg-ink/45 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
+          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase text-bg opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
         </div>
         <div class="g-item g-wide relative overflow-hidden cursor-pointer group">
           <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.045]">
             <img src="https://images.pexels.com/photos/12261087/pexels-photo-12261087.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="A bone-in cut sizzling over the open grill flame" loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
           </div>
-          <div class="absolute inset-0 bg-bg/28 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
-          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
+          <div class="absolute inset-0 bg-ink/45 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
+          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase text-bg opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
         </div>
         <div class="g-item relative overflow-hidden cursor-pointer group">
           <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.045]">
             <img src="https://images.pexels.com/photos/4110409/pexels-photo-4110409.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Wine glasses arranged on a dark surface" loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
           </div>
-          <div class="absolute inset-0 bg-bg/28 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
-          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
+          <div class="absolute inset-0 bg-ink/45 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
+          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase text-bg opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
         </div>
         <div class="g-item g-big relative overflow-hidden cursor-pointer group">
           <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.045]">
             <img src="https://images.pexels.com/photos/7205249/pexels-photo-7205249.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Chef at work managing an open flame" loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
           </div>
-          <div class="absolute inset-0 bg-bg/28 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
-          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
+          <div class="absolute inset-0 bg-ink/45 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
+          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase text-bg opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
         </div>
         <div class="g-item relative overflow-hidden cursor-pointer group">
           <div class="absolute inset-0 transition-transform duration-700 ease-premium group-hover:scale-[1.045]">
             <img src="https://images.pexels.com/photos/28059316/pexels-photo-28059316.jpeg?auto=compress&cs=tinysrgb&w=900" alt="A set table with candlelight and fine glassware" loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
           </div>
-          <div class="absolute inset-0 bg-bg/28 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
-          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
+          <div class="absolute inset-0 bg-ink/45 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-premium z-10"></div>
+          <span class="absolute inset-0 z-20 flex items-center justify-center text-[11px] tracking-[0.2em] uppercase text-bg opacity-0 translate-y-2.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-premium">View →</span>
         </div>
       </div>
     </div>
@@ -601,7 +601,7 @@
         <div class="flex flex-col gap-2">
           <label for="date" class="text-[11px] tracking-[0.18em] uppercase text-ink-soft">Date</label>
           <input id="date" name="date" type="date" class="field bg-transparent border-b border-line-strong text-[16px] py-3 px-1 transition-colors duration-400 outline-none hover:border-line-strong focus:border-gold" />
-          <span class="field-error hidden text-xs" style="color:#D98066;">This field is required.</span>
+          <span class="field-error hidden text-xs" style="color:#B1512F;">This field is required.</span>
         </div>
         <div class="flex flex-col gap-2">
           <label for="guests" class="text-[11px] tracking-[0.18em] uppercase text-ink-soft">Guests</label>
@@ -614,22 +614,22 @@
             <option value="5" class="bg-surface">5</option>
             <option value="6+" class="bg-surface">6+</option>
           </select>
-          <span class="field-error hidden text-xs" style="color:#D98066;">This field is required.</span>
+          <span class="field-error hidden text-xs" style="color:#B1512F;">This field is required.</span>
         </div>
         <div class="flex flex-col gap-2">
           <label for="time" class="text-[11px] tracking-[0.18em] uppercase text-ink-soft">Time</label>
           <input id="time" name="time" type="time" class="field bg-transparent border-b border-line-strong text-[16px] py-3 px-1 transition-colors duration-400 outline-none hover:border-line-strong focus:border-gold" />
-          <span class="field-error hidden text-xs" style="color:#D98066;">This field is required.</span>
+          <span class="field-error hidden text-xs" style="color:#B1512F;">This field is required.</span>
         </div>
         <div class="flex flex-col gap-2">
           <label for="name" class="text-[11px] tracking-[0.18em] uppercase text-ink-soft">Name</label>
           <input id="name" name="name" type="text" placeholder="Full name" class="field bg-transparent border-b border-line-strong text-[16px] py-3 px-1 transition-colors duration-400 outline-none hover:border-line-strong focus:border-gold" />
-          <span class="field-error hidden text-xs" style="color:#D98066;">This field is required.</span>
+          <span class="field-error hidden text-xs" style="color:#B1512F;">This field is required.</span>
         </div>
         <div class="md:col-span-2 flex flex-col gap-2">
           <label for="phone" class="text-[11px] tracking-[0.18em] uppercase text-ink-soft">Phone</label>
           <input id="phone" name="phone" type="tel" placeholder="+61 4XX XXX XXX" class="field bg-transparent border-b border-line-strong text-[16px] py-3 px-1 transition-colors duration-400 outline-none hover:border-line-strong focus:border-gold" />
-          <span class="field-error hidden text-xs" style="color:#D98066;">This field is required.</span>
+          <span class="field-error hidden text-xs" style="color:#B1512F;">This field is required.</span>
         </div>
 
         <div class="md:col-span-2 mt-2">
@@ -760,11 +760,11 @@
   var nav = document.getElementById('siteNav');
   function onScroll() {
     if (window.scrollY > 80) {
-      nav.classList.remove('py-7', 'bg-transparent');
-      nav.classList.add('bg-bg/72', 'backdrop-blur-md', 'border-b', 'border-line', 'py-4');
+      nav.classList.remove('py-7', 'bg-transparent', 'text-bg');
+      nav.classList.add('bg-bg/72', 'backdrop-blur-md', 'border-b', 'border-line', 'py-4', 'text-ink');
     } else {
-      nav.classList.add('py-7', 'bg-transparent');
-      nav.classList.remove('bg-bg/72', 'backdrop-blur-md', 'border-b', 'border-line', 'py-4');
+      nav.classList.add('py-7', 'bg-transparent', 'text-bg');
+      nav.classList.remove('bg-bg/72', 'backdrop-blur-md', 'border-b', 'border-line', 'py-4', 'text-ink');
     }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -994,7 +994,7 @@
       if (!f.value || !f.value.toString().trim()) {
         hasError = true;
         f.classList.remove('border-line-strong');
-        f.style.borderColor = '#D98066';
+        f.style.borderColor = '#B1512F';
         errorEl.classList.remove('hidden');
       } else {
         f.style.borderColor = '';
